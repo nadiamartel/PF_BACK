@@ -12,10 +12,12 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     date: {
-      
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     hour: {
-
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     cost: {
       type: DataTypes.STRING,
