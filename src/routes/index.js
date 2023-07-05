@@ -1,6 +1,7 @@
-//const { Router } = require("express");
-//const router = Router();
+const { Router } = require("express");
+const router = Router();
+const activitiesRouter = require("./activities");
 
-//router.use();
+router.use("/activities", activitiesRouter);
 
-//module.exports = router;
+module.exports = router;
