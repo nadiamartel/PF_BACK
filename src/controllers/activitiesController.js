@@ -9,6 +9,8 @@ const postActivity = async ({
   hours,
   days,
   store,
+  age,
+  players
 }) => {
   const [activity, created] = await Activity.findOrCreate({
     where: { name },
@@ -21,6 +23,8 @@ const postActivity = async ({
       hours,
       days,
       store,
+      age,
+      players
     },
   });
 

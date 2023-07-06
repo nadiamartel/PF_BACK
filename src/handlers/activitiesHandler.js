@@ -1,7 +1,7 @@
 const { postActivity, getActivityByName } = require("../controllers/activitiesController");
 const {Activity, Store} = require('../db')
 const createActivity = async (req, res) => {
-  const { id, name, description, picture, cost, hours, days, store } = req.body;
+  const { id, name, description, picture, cost, hours, days, store, age, players } = req.body;
   try {
     const response = await postActivity({
       id,
@@ -12,6 +12,8 @@ const createActivity = async (req, res) => {
       hours,
       days,
       store,
+      age,
+      players
     });
 
     return res.status(200).json(response);
