@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const storeRouter = Router();
-const {createStore} = require ("../handlers/storesHandler")
+const {createStore, getStores} = require ("../handlers/storesHandler")
 
 storeRouter
 .post("/", createStore)
-.get("/")
+.get("/", getStores)
 
 module.exports = storeRouter;

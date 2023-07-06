@@ -1,4 +1,5 @@
-const { postStore } = require("../controllers/storesController");
+const { postStore, getAllStores } = require("../controllers/storesController");
+
 const createStore = async (req, res) => {
   const { id, name, address, phone, picture } = req.body;
   try {
@@ -10,6 +11,16 @@ const createStore = async (req, res) => {
   }
 };
 
+const getStores = async (req, res) => {
+  try {
+    const response = await getAllStores()
+    return res.status(200).json(response)
+  } catch (error) {
+    res.status(404).json({error: error.message})
+  }
+}
+
 module.exports = {
   createStore,
+  getStores,
 };

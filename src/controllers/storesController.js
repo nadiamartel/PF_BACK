@@ -19,6 +19,15 @@ const postStore = async ({ id, name, address, phone, picture }) => {
   return store;
 };
 
+const getAllStores = async () => {
+  const allStores = await Store.findAll()
+
+  if(!allStores) throw Error('Stores not found!')
+
+  return allStores
+}
+
 module.exports = {
   postStore,
+  getAllStores,
 };
