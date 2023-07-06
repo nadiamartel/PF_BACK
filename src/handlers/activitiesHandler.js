@@ -1,26 +1,20 @@
-const { Activity } = require("../db");
+const { postActivity } = require("../controllers/activitiesController");
 
 const createActivity = async (req, res) => {
-  const { id, name, description, picture, cost, hours, days } = req.body;
+  const { id, name, description, picture, cost, hours, days, store } = req.body;
   try {
-    const [activity, created] = await Activity.findOrCreate({
-      where: { name },
-      defaults: {
-        id,
-        name,
-        description,
-        picture,
-        cost,
-        hours,
-        days,
-      },
+    const response = await postActivity({
+      id,
+      name,
+      description,
+      picture,
+      cost,
+      hours,
+      days,
+      store,
     });
 
-    if (!created) {
-      return res.status(404).json({ error: "Activity already exists" });
-    }
-
-    return res.status(200).json(activity);
+    return res.status(200).json(response);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
