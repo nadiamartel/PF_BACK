@@ -56,6 +56,14 @@ module.exports = (sequelize) => {
         ),
         allowNull: false,
       },
+      players: {
+        type: DataTypes.ARRAY(DataTypes.ENUM("2-4", "4-8", "+8")),
+        allowNull: false,
+      },
+      age: {
+        type: DataTypes.ARRAY(DataTypes.ENUM("Niños", "Adultos")),
+        allowNull: false,
+      },
     },
     { timestamps: false }
   );
