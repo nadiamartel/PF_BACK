@@ -13,7 +13,7 @@ const postStore = async ({ id, name, address, phone, picture }) => {
   });
 
   if (!created) {
-    return res.status(404).json({ error: "Store already exists" });
+     throw Error( "Store already exists") ;
   }
 
   return store;

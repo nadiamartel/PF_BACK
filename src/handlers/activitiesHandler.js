@@ -1,5 +1,5 @@
-const { postActivity } = require("../controllers/activitiesController");
-
+const { postActivity, getActivityByName } = require("../controllers/activitiesController");
+const {Activity, Store} = require('../db')
 const createActivity = async (req, res) => {
   const { id, name, description, picture, cost, hours, days, store } = req.body;
   try {
@@ -20,6 +20,27 @@ const createActivity = async (req, res) => {
   }
 };
 
+
+const getActivities = async (req, res) => {
+  try {
+      const {name} = req.query
+      const results = name ? await getActivityByName(name) : await Activity.findAll({
+          include:{
+              model: Store,
+              attributes: ['name'],
+              through: {
+                  attributes: []
+              }
+          }
+      }) 
+      results && res.status(200).json(results)
+  } catch (error) {
+      res.status(500).json({error: error.message})
+  }
+}
+
+
 module.exports = {
   createActivity,
+  getActivities
 };

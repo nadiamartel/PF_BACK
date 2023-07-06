@@ -25,7 +25,7 @@ const postActivity = async ({
   });
 
   if (!created) {
-    return res.status(404).json({ error: "Activity already exists" });
+    throw Error( "Activity already exists") ;
   }
 
   await activity.addStores(store);
@@ -33,6 +33,19 @@ const postActivity = async ({
   return activity;
 };
 
+const getActivityByName = async (name) => {
+  try {
+      const activity =  await Activity.findAll({where: { name: name}})
+      if(!activity) throw Error('Activity not found!')
+      return activity
+  } catch (error) {
+      throw Error(error.message)
+  }
+}
+
+
 module.exports = {
   postActivity,
+  getActivityByName
+
 };
