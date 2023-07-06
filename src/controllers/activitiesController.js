@@ -31,7 +31,7 @@ const postActivity = async ({
   if (!created) {
     throw Error("Activity already exists");
   }
-
+  
   await activity.addStores(store);
 
   return activity;
