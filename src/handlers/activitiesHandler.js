@@ -1,4 +1,4 @@
-const { postActivity, getActivityByName } = require("../controllers/activitiesController");
+const { postActivity, getActivityByName, getDetail } = require("../controllers/activitiesController");
 const {Activity, Store} = require('../db')
 const createActivity = async (req, res) => {
   const { id, name, description, picture, cost, hours, days, store, age, players } = req.body;
@@ -37,12 +37,24 @@ const getActivities = async (req, res) => {
       }) 
       results && res.status(200).json(results)
   } catch (error) {
-      res.status(500).json({error: error.message})
+      return res.status(500).json({error: error.message})
   }
 }
 
+const getActivityById = async (req,res) =>{
+  try {
+    const { id } = req.params;
+    const detail = await getDetail(id);
+
+    return res.status(200).json(detail);
+  } catch (error) {
+    
+    return res.status(404).json({error:error.message});
+  }
+}
 
 module.exports = {
   createActivity,
-  getActivities
+  getActivities,
+  getActivityById
 };
