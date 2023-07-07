@@ -16,8 +16,7 @@ const createActivity = async (req, res) => {
       age,
       players
     });
-    console.log(response);
-    console.log(storeId);
+
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);
@@ -37,7 +36,7 @@ const getActivities = async (req, res) => {
                   attributes: []
               }
           }
-      }) 
+      })
       results && res.status(200).json(results)
   } catch (error) {
       return res.status(500).json({error: error.message})

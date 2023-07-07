@@ -1,6 +1,6 @@
 const { Store } = require("../db");
 
-const postStore = async ({ id, name, address, phone, picture }) => {
+const postStore = async ({ id, name, address, phone, picture, email, maps }) => {
   const [store, created] = await Store.findOrCreate({
     where: { name },
     defaults: {
@@ -9,6 +9,8 @@ const postStore = async ({ id, name, address, phone, picture }) => {
       address,
       picture,
       phone,
+      email,
+      maps,
     },
   });
 
