@@ -16,7 +16,7 @@ const postActivity = async ({
     where: { name },
     defaults: {
       id,
-      name,
+      name: name.toLowerCase(),
       description,
       picture,
       cost,
@@ -39,7 +39,7 @@ const postActivity = async ({
 const getActivityByName = async (name) => {
   try {
     const activity = await Activity.findAll({ 
-      where: { name: name },
+      where: { name: name.toLowerCase() },
       include: [
         {
           model: Store,

@@ -1,9 +1,9 @@
 const { postStore, getAllStores } = require("../controllers/storesController");
 
 const createStore = async (req, res) => {
-  const { id, name, address, phone, picture } = req.body;
+  const { id, name, address, phone, picture, email, maps } = req.body;
   try {
-    const response = await postStore({ id, name, address, phone, picture });
+    const response = await postStore({ id, name, address, phone, picture, email, maps });
 
     return res.status(200).json(response);
   } catch (error) {

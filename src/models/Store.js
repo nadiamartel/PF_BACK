@@ -23,8 +23,15 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       picture: {
+        type: DataTypes.ARRAY(DataTypes.STRING(1000)),
+        allowNull: false,
+      },
+      email: {
         type: DataTypes.STRING,
         allowNull: false,
+      },
+      maps: {
+        type: DataTypes.STRING(500)
       },
     },
     { timestamps: false }
