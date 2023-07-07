@@ -22,7 +22,6 @@ const postActivity = async ({
       cost,
       hours,
       days,
-      store,
       age,
       players,
     },
