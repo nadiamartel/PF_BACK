@@ -38,7 +38,18 @@ const postActivity = async ({
 
 const getActivityByName = async (name) => {
   try {
-    const activity = await Activity.findAll({ where: { name: name } });
+    const activity = await Activity.findAll({ 
+      where: { name: name },
+      include: [
+        {
+          model: Store,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          }
+        }
+      ]
+    });;
     if (!activity) throw Error("Activity not found!");
     return activity;
   } catch (error) {
