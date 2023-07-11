@@ -23,13 +23,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    picture: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    admin: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: true,
-    },
+    // picture: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    // },
+    // admin: {
+    //   type: DataTypes.BOOLEAN,
+    //   defaultValue: true,
+    // },
   });
 };
