@@ -48,10 +48,10 @@ module.exports = (sequelize) => {
           DataTypes.ENUM(
             "Lunes",
             "Martes",
-            "Miercoles",
+            "Miércoles",
             "Jueves",
             "Viernes",
-            "Sabado"
+            "Sábado"
           )
         ),
         allowNull: false,
