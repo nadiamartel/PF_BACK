@@ -27,9 +27,9 @@ module.exports = (sequelize) => {
     //   type: DataTypes.STRING,
     //   allowNull: true,
     // },
-    // admin: {
-    //   type: DataTypes.BOOLEAN,
-    //   defaultValue: true,
-    // },
+    client: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: true,
+    },
   });
 };
