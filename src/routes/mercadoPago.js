@@ -3,7 +3,7 @@ const mercadopagoRouter = Router();
 const mercadopago =require('mercadopago') 
 
 mercadopago.configure({
-    access_token: 'TEST-7828015077473810-070813-2f51e9ccd2270ffaa4e2b53e77c96251-1417786045',
+    access_token: 'APP_USR-893648489824668-071214-987e2f3afd2b948e0d582a4f826ce2cf-1421381091',
   })
 
 mercadopagoRouter.post('/', (req, res) => {
@@ -16,8 +16,8 @@ mercadopagoRouter.post('/', (req, res) => {
           },
         ],
         back_urls: {
-          success: "http://localhost:3000",
-          failure: "http://localhost:3000",
+          success: "http://localhost:3000/success",
+          failure: "http://localhost:3000/failure",
           pending: "",
         },
         auto_return: "approved",
