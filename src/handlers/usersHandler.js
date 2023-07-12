@@ -2,6 +2,7 @@ const {
   postUser,
   putUser,
   deleteOneUser,
+  infoUserById
 } = require("../controllers/usersController");
 
 const createUser = async (req, res) => {
@@ -15,6 +16,16 @@ const createUser = async (req, res) => {
     return res.status(400).json({ error: error.message });
   }
 };
+
+const getUser = async(req, res) =>{
+  const { id } = req.params;
+  try {
+    const getUserById = await infoUserById(id);
+    return res.status(200).json(getUserById)
+  } catch (error) {
+    return res.status(404).send("No se puedo encontrar el usuario")
+  }
+}
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -42,4 +53,5 @@ module.exports = {
   createUser,
   updateUser,
   deleteUser,
+  getUser
 };
