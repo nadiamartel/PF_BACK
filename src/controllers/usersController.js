@@ -1,4 +1,4 @@
-const { User } = require("../db");
+const { User, Reservation, Review } = require("../db");
 
 const postUser = async({id, name, email, password, phone}) => {
     const [user, created] = await User.findOrCreate({
@@ -18,6 +18,37 @@ const postUser = async({id, name, email, password, phone}) => {
 
 }
 
+const infoUserById = async(id) =>{
+  const users =  await User.findByPk(id, {
+    include: [
+      {
+        model: Reservation,
+        include: [
+          {
+            model: User
+          },
+        ]
+      },
+      {
+        model: Review,
+        include: [
+          {
+            model: User
+          },
+        ]
+      }
+
+    ]
+  });
+
+  if(!users) throw Error('Usuario no encontrado');
+
+  return users;
+}
+
+
+
 module.exports={
-    postUser
+    postUser,
+    infoUserById
 }
