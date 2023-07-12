@@ -1,9 +1,9 @@
 const { Router } = require("express");
 const usersRouter = Router();
-const { createUser } = require("../handlers/usersHandler");
+const { createUser, deleteUser } = require("../handlers/usersHandler");
 
 usersRouter
 .post("/", createUser)
-
+.delete("/:id", deleteUser)
 
 module.exports = usersRouter;
