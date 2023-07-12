@@ -1,5 +1,3 @@
-const { User } = require("../db");
-
 const postUser = async ({ id, name, email, password, phone }) => {
   const [user, created] = await User.findOrCreate({
     where: { email },
@@ -17,7 +15,7 @@ const postUser = async ({ id, name, email, password, phone }) => {
   return user;
 };
 
-const deleteOneUser = async ({id}) => {
+const deleteOneUser = async ({ id }) => {
   const deleteUser = await User.destroy({
     where: {
       id: id,
@@ -27,7 +25,21 @@ const deleteOneUser = async ({id}) => {
   return deleteUser;
 };
 
+const putUser = async ({ id, name, email, password, phone }) => {
+  const user = await User.findByPk(id);
+
+  if (!user) throw Error("El usuario no existe");
+
+  const newUpdate = user.update(
+    { name, email, password, phone },
+    { where: { id: id } }
+  );
+
+  return newUpdate;
+};
+
 module.exports = {
   postUser,
+  putUser,
   deleteOneUser,
 };
