@@ -1,4 +1,3 @@
-const { Error } = require('sequelize');
 const { Reservation, User, Activity } = require('../db')
 
 const createReservation = async ({idUser, idActivity, date, cost, hour}) => {
@@ -51,8 +50,21 @@ const deleteOneReservation = async ({ id }) => {
   return deleteReservation;
 };
 
+const putReservation = async ({id}) => {
+  const findReserv = await Reservation.findByPk(id)
+
+  if(!findReserv) throw Error('No se encontró la reserva')
+  
+  const reservPut = await findReserv.update({
+    pay: true,
+  })
+
+  return reservPut
+}
+
 module.exports = {
     createReservation,
     getAllReservations,
-    deleteOneReservation
+    deleteOneReservation,
+    putReservation
 }

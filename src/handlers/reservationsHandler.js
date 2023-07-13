@@ -1,5 +1,5 @@
 
-const {createReservation, getAllReservations, deleteOneReservation} = require('../controllers/reservationsController')
+const {createReservation, getAllReservations, deleteOneReservation, putReservation} = require('../controllers/reservationsController')
 
 const postReservation = async (req, res) => {
     const {idUser, idActivity, date, cost, hour} = req.body
@@ -33,10 +33,20 @@ const deleteReservation = async (req, res) => {
     }
   };
   
-//   const updateReservation = HAY QUE HACERLA Y MODIFICAR EL MODELO RESERVATION
+const updateReservation = async (req, res) => {
+    const { id } = req.params
+    try {
+        await putReservation({id})
+
+        return res.status(200).json('Reserva pagada')
+    } catch (error) {
+        return res.status(400).json({error: error.message})
+    }
+}
 
 module.exports = {
     postReservation,
     getReservations,
-    deleteReservation
+    deleteReservation,
+    updateReservation
 }
