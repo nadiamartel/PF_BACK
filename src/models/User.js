@@ -21,12 +21,8 @@ module.exports = (sequelize) => {
     },
     phone: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
-    // picture: {
-    //   type: DataTypes.STRING,
-    //   allowNull: true,
-    // },
     client: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
