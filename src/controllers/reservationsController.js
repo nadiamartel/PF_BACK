@@ -41,7 +41,18 @@ const getAllReservations = async () => {
     return findReservations; 
 }
 
+const deleteOneReservation = async ({ id }) => {
+  const deleteReservation = await Reservation.destroy({
+    where: {
+      id,
+    },
+  });
+
+  return deleteReservation;
+};
+
 module.exports = {
     createReservation,
-    getAllReservations
+    getAllReservations,
+    deleteOneReservation
 }
