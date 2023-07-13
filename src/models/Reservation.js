@@ -19,5 +19,9 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    pay: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
 };
