@@ -1,5 +1,3 @@
-
-
 const template =`<!DOCTYPE html>
 <html>
 <head>
