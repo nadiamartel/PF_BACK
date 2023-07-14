@@ -1,4 +1,5 @@
 const { User } = require("../db");
+const emailer = require ('../emailer');
 
 const postLoginGoogle = async({email, googleId, name}) =>{
 
@@ -11,9 +12,12 @@ const postLoginGoogle = async({email, googleId, name}) =>{
             password: googleId,
         } 
     });
-
+    emailer.sendMail(user)
     return user;
+    
 }
+
+
 
 module.exports = {
     postLoginGoogle
