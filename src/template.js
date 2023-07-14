@@ -4,7 +4,7 @@ const template =`<!DOCTYPE html>
 <html>
 <head>
 </head>
-<body>
+<body></br></br>
 <center>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
     <tbody>
@@ -34,7 +34,7 @@ const template =`<!DOCTYPE html>
                                                 </p>
                                                 <p style="margin:0;font-size:20px;line-height:20px">&nbsp;</p>
                                                 <p style="margin:0;font-family:Helvetica,Arial,sans-serif;color:#333333;font-size:16px;line-height:24px;font-weight:400;max-width:520px">
-                                                    Hola, bienvenido a la comunidad deportiva más grande en Córdoba. Ahora podrás contactarnos y reservar tus actividades.
+                                                    Bienvenido a la comunidad deportiva más grande en Córdoba. Ahora podrás contactarnos y reservar tus actividades.
                                                 </p>
                                                 <p style="margin:0;font-size:24px;line-height:24px">&nbsp;</p>
                                                 <p style="margin:0;font-family:Helvetica,Arial,sans-serif;color:#333333;font-size:16px;line-height:24px;font-weight:400;max-width:520px">
@@ -48,9 +48,9 @@ const template =`<!DOCTYPE html>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="left" valign="top" style="padding-top: 20px;">
+                                            <td align="justify" valign="top" style="padding-top: 20px;">
                                                 <p style="padding:0;margin:0;font-family:Helvetica,Arial,sans-serif;font-size:11px;line-height:14px;color:#999999">
-                                                    Te informamos que los datos personales contenidos en esta comunicación fueron recogidos en nuestro Formulario de registro, cuyo responsable es Sportiverse. Al registrarte como usuario, aceptas y consientes que tus datos sean almacenados por nuestra plataforma para gestionar el envío de las comunicaciones correspondientes.
+                                                    Te informamos que los datos personales contenidos en esta comunicación fueron recogidos en nuestro formulario de registro, cuyo responsable es Sportiverse. Al registrarte como usuario, aceptas y consientes que tus datos sean almacenados por nuestra plataforma para gestionar el envío de las comunicaciones correspondientes.
                                                 </p>
                                             </td>
                                         </tr>

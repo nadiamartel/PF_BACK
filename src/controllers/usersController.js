@@ -12,7 +12,7 @@ const postUser = async({id, name, email, password, phone}) => {
       },
     });
     
-    if (!created) throw Error("El usuario no existe")
+    if (!created) throw Error("El usuario ya existe")
     
    return user;
 
@@ -60,7 +60,7 @@ const deleteOneUser = async ({ id }) => {
 const putUser = async ({ id, name, email, password, phone }) => {
   const user = await User.findByPk(id);
 
-  if (!user) throw Error("El usuario no existe");
+  if (!user) throw Error("El usuario ya existe");
 
   const newUpdate = user.update(
     { name, email, password, phone },

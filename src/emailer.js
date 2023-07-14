@@ -1,22 +1,22 @@
 const nodemailer = require('nodemailer')
 const { template } = require('./template.js')
-//const nodemailerSendgrid = require('nodemailer-sendgrid');
+const nodemailerSendgrid = require('nodemailer-sendgrid');
 
 const createTrans = () => {
-    const transport = nodemailer.createTransport({
+   /* const transport = nodemailer.createTransport({
        host: "sandbox.smtp.mailtrap.io",
        port: 2525,
        auth: {
          user: "9d7b69f8fd8b3d",
          pass: "1d3176577bc208"
        }
-     });
-    /*const transport = nodemailer.createTransport(
+     });*/
+    const transport = nodemailer.createTransport(
         nodemailerSendgrid({
-            apiKey: '',
-        })*/
+            apiKey: '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',
+        })
+        );
 return transport;
-
 }
 
 const sendMail = async (user) => {
@@ -24,7 +24,7 @@ const sendMail = async (user) => {
     const info = await transporter.sendMail({
         from: '"Sportiverse ⚡"<sportiversee@gmail.com>',
         to: `${user.email}`,
-        subject: `Hola ${user.name}, Bienvenido a Sportiverse`,
+        subject: `Hola ${user.name}, te damos la bienvenida a Sportiverse`,
         html: template,
 
     });
@@ -36,7 +36,7 @@ const sendMail = async (user) => {
 const sendMailReservation = async (user) => {
     const transporter = createTrans()
     const info = await transporter.sendMail({
-        from: '"Sportiverse ⚡" <sportiverse@example.com>',
+        from: '"Sportiverse ⚡" <sportiversee@gmail.com>',
         to: `${user?.emailUser}`,
         subject: `Hola ${user?.user}, tu reserva ya ha sido proceda en Sportiverse`,
         html: `<center></br></br></br>
@@ -61,6 +61,7 @@ const sendMailReservation = async (user) => {
                       </p>
                       <p style="margin:0;font-size:20px;line-height:20px">&nbsp;</p>
                       <p style="margin:0;font-family:Helvetica,Arial,sans-serif;color:#333333;font-size:16px;line-height:24px;font-weight:400;max-width:520px">
+                        Estos son los detalles de tu reserva <br>
                         Actividad: ${user?.activity}<br>
                         Fecha: ${user?.date}<br>
                         Costo: ${user?.cost}<br>
@@ -84,7 +85,7 @@ const sendMailReservation = async (user) => {
               </td>
             </tr>
             <tr>
-              <td align="left" valign="top"><br><br>
+              <td align="justify" valign="top"><br><br>
                 <p style="padding:0;margin:0;font-family:Helvetica,Arial,sans-serif;font-size:11px;line-height:14px;color:#999999">
                   Te informamos que los datos personales contenidos en esta comunicación fueron recogidos en nuestro Formulario de registro, cuyo responsable es Sportiverse, dado que prestaste tu consentimiento para recibir nuestras comunicaciones. Al registrarte como usuario, aceptas y consientes que tus datos sean almacenados por nuestra plataforma para gestionar el envío de las comunicaciones correspondientes.
                 </p>
