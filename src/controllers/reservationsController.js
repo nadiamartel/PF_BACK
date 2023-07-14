@@ -1,4 +1,5 @@
 const { Reservation, User, Activity, Store } = require("../db");
+const emailer = require ('../emailer') 
 
 const createReservation = async ({ idUser, idActivity, date, cost, hour }) => {
   const [reservation, created] = await Reservation.findOrCreate({
@@ -69,10 +70,21 @@ const putReservation = async ({ id }) => {
 
   return reservPut;
 };
+const postEmail = async ({ reservId, activity, date, hour,cost, user,store,storeAddress}) => {
+  console.log (user)
+  const foundUser = await User.findOne({where:{name:user}})
+  const emailUser = foundUser.email
+  const response = {reservId, activity, date, hour,cost, user,store,storeAddress,emailUser}
+
+  emailer.sendMailReservation(response)
+
+}
+
 
 module.exports = {
   createReservation,
   getAllReservations,
   deleteOneReservation,
   putReservation,
+  postEmail,
 };

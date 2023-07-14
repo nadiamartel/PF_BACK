@@ -1,3 +1,5 @@
+const emailer = require ('../emailer') 
+
 const {
   postUser,
   putUser,
@@ -9,7 +11,7 @@ const createUser = async (req, res) => {
   const { id, name, email, password, phone } = req.body;
   try {
     const response = await postUser({ id, name, email, password, phone });
-
+    emailer.sendMail(response)
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);
