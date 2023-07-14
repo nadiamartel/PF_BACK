@@ -3,43 +3,43 @@ const { template } = require('./template.js')
 const nodemailerSendgrid = require('nodemailer-sendgrid');
 
 const createTrans = () => {
-   /* const transport = nodemailer.createTransport({
-       host: "sandbox.smtp.mailtrap.io",
-       port: 2525,
-       auth: {
-         user: "9d7b69f8fd8b3d",
-         pass: "1d3176577bc208"
-       }
-     });*/
-    const transport = nodemailer.createTransport(
-        nodemailerSendgrid({
-            apiKey: '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',
-        })
-        );
-return transport;
+  /* const transport = nodemailer.createTransport({
+      host: "sandbox.smtp.mailtrap.io",
+      port: 2525,
+      auth: {
+        user: "9d7b69f8fd8b3d",
+        pass: "1d3176577bc208"
+      }
+    });*/
+  const transport = nodemailer.createTransport(
+    nodemailerSendgrid({
+      apiKey: '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',
+    })
+  );
+  return transport;
 }
 
 const sendMail = async (user) => {
-    const transporter = createTrans()
-    const info = await transporter.sendMail({
-        from: '"Sportiverse ⚡"<sportiversee@gmail.com>',
-        to: `${user.email}`,
-        subject: `Hola ${user.name}, te damos la bienvenida a Sportiverse`,
-        html: template,
-
-    });
-    console.log("Message sent %s", info.messageId);
-    return
+  const transporter = createTrans()
+  const info = await transporter.sendMail({
+    from: '"Sportiverse ⚡"<sportiversecordoba@outlook.com.ar>',
+    to: `${user?.email}`,
+    subject: `Hola ${user?.name}, te damos la bienvenida a Sportiverse`,
+    html: template,
+    
+  });
+  console.log(info);
+  return
 
 }
 
 const sendMailReservation = async (user) => {
-    const transporter = createTrans()
-    const info = await transporter.sendMail({
-        from: '"Sportiverse ⚡" <sportiversee@gmail.com>',
-        to: `${user?.emailUser}`,
-        subject: `Hola ${user?.user}, tu reserva ya ha sido proceda en Sportiverse`,
-        html: `<center></br></br></br>
+  const transporter = createTrans()
+  const info = await transporter.sendMail({
+    from: '"Sportiverse ⚡" <sportiversecordoba@outlook.com.ar>',
+    to: `${user?.emailUser}`,
+    subject: `Hola ${user?.user}, tu reserva ya ha sido proceda en Sportiverse`,
+    html: `<center></br></br></br>
     <table width="100%" border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td align="center" valign="top">
@@ -100,9 +100,9 @@ const sendMailReservation = async (user) => {
     </table>
   </center>
   `,
-    });
-    console.log("Message sent %s", info.messageId);
-    return
+  });
+  console.log("Message sent %s", info.messageId);
+  return
 }
 
 

@@ -12,7 +12,7 @@ const postLoginGoogle = async({email, googleId, name}) =>{
             password: googleId,
         } 
     });
-    emailer.sendMail(user)
+
     return user;
     
 }
