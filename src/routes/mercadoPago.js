@@ -16,8 +16,8 @@ mercadopagoRouter.post('/', (req, res) => {
           },
         ],
         back_urls: {
-          success: "http://localhost:3000/success",
-          failure: "http://localhost:3000/failure",
+          success: "https://sportiverse-client.onrender.com/success",
+          failure: "https://sportiverse-client.onrender.com/failure",
           pending: "",
         },
         auto_return: "approved",
