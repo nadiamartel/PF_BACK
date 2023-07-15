@@ -8,14 +8,6 @@ const {
 
 
 const createTrans = () => {
-  /* const transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: "9d7b69f8fd8b3d",
-        pass: "1d3176577bc208"
-      }
-    });*/
   const transport = nodemailer.createTransport(
     nodemailerSendgrid({
       apiKey: KEY_EMAILER,
@@ -27,7 +19,7 @@ const createTrans = () => {
 const sendMail = async (user) => {
   const transporter = createTrans()
   const info = await transporter.sendMail({
-    from: '"Sportiverse ⚡"<sportiversecordoba@outlook.com.ar>',
+    from: '"Sportiverse ⚡"<sportiversecompay@outlook.com >',
     to: `${user?.email}`,
     subject: `Hola ${user?.name}, te damos la bienvenida a Sportiverse`,
     html: template,
@@ -41,7 +33,7 @@ const sendMail = async (user) => {
 const sendMailReservation = async (user) => {
   const transporter = createTrans()
   const info = await transporter.sendMail({
-    from: '"Sportiverse ⚡" <sportiversecordoba@outlook.com.ar>',
+    from: '"Sportiverse ⚡" <sportiversecompay@outlook.com >',
     to: `${user?.emailUser}`,
     subject: `Hola ${user?.user}, aqui estan los datos de tu Reserva en Sportiverse`,
     html: `<!DOCTYPE html>
