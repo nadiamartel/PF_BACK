@@ -1,19 +1,16 @@
+require('dotenv').config();
 const nodemailer = require('nodemailer')
 const { template } = require('./template.js')
 const nodemailerSendgrid = require('nodemailer-sendgrid');
+const {
+  KEY_EMAILER
+ } = process.env;
+
 
 const createTrans = () => {
-  /* const transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: "9d7b69f8fd8b3d",
-        pass: "1d3176577bc208"
-      }
-    });*/
   const transport = nodemailer.createTransport(
     nodemailerSendgrid({
-      apiKey: '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',
+      apiKey: KEY_EMAILER,
     })
   );
   return transport;
@@ -26,9 +23,7 @@ const sendMail = async (user) => {
     to: `${user?.email}`,
     subject: `Hola ${user?.name}, te damos la bienvenida a Sportiverse`,
     html: template,
-    
   });
-  console.log(info);
   return
 
 }

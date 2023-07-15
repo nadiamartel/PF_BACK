@@ -1,9 +1,13 @@
+require('dotenv').config();
 const { Router } = require('express');
 const mercadopagoRouter = Router();
 const mercadopago =require('mercadopago') 
+const {
+  TOKEN_MP
+ } = process.env;
 
 mercadopago.configure({
-    access_token: 'APP_USR-893648489824668-071214-987e2f3afd2b948e0d582a4f826ce2cf-1421381091',
+    access_token: TOKEN_MP,
   })
 
 mercadopagoRouter.post('/', (req, res) => {
