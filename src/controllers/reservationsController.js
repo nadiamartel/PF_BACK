@@ -2,22 +2,15 @@ const { Reservation, User, Activity, Store } = require("../db");
 const emailer = require ('../emailer') 
 
 const createReservation = async ({ idUser, idActivity, date, cost, hour }) => {
-  const [reservation, created] = await Reservation.findOrCreate({
-    where: { date, hour },
-    defaults: {
-      date,
-      hour,
-      cost,
-      userId: idUser,
-      activityId: idActivity,
-    },
+  const newReservation = await Reservation.create({
+    date,
+    hour,
+    cost,
+    userId: idUser,
+    activityId: idActivity,
   });
 
-  if (!created) {
-    throw Error("La actividad ya esta reservada en ese horario!");
-  }
-
-  return reservation;
+  return newReservation;
 };
 
 const getAllReservations = async () => {
