@@ -27,5 +27,14 @@ module.exports = (sequelize) => {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
     },
-  });
+    picture: {
+      type: DataTypes.STRING(1000),
+      allowNull: true,
+    },
+
+  },
+    {
+      paranoid: true
+    }
+  );
 };

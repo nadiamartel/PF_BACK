@@ -34,6 +34,8 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING(500)
       },
     },
-    { timestamps: false }
+    {
+      paranoid: true
+    }
   );
 };

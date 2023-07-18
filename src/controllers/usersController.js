@@ -67,29 +67,42 @@ const infoAllUsers = async() =>{
   return clients;
 }
 
-const putUser = async ({ id, name, password, phone }) => {
+const putUser = async ({ id, name, password, phone, picture }) => {
   if(!id) throw Error("Debe proporcionar un ID para realizar el cambio")
 
   const userUpdate = await User.findByPk(id);
-  console.log(userUpdate);
+  
 
   if (userUpdate === null) throw Error("Debe ingresar un ID valido");
   if (!userUpdate.client) throw Error("No se puede editar el usuario porque no es un cliente");
 
   userUpdate.name= name || userUpdate.name;
   userUpdate.password= password || userUpdate.password;
-  userUpdate.phone= phone || userUpdate.phone
+  userUpdate.phone= phone || userUpdate.phone;
+  userUpdate.picture= picture || userUpdate.picture 
 
   await userUpdate?.save();
-  console.log(userUpdate);
+  
   return  { message: "Informacion Actualizada!" };
 };
+
+const restoreUserById = async(id) => {
+  const restoredUser = await User.restore({ where: { id } });
+
+  if (!restoredUser) throw Error("El usuario no existe");
+
+  return restoredUser;
+};
+
+
+
 
 module.exports = {
   postUser,
   putUser,
   deleteOneUser,
   infoUserById,
-  infoAllUsers
+  infoAllUsers,
+  restoreUserById
 };
 

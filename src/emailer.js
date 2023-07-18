@@ -25,7 +25,7 @@ const sendMail = async (user) => {
     html: template,
     
   });
-  console.log(info);
+
   return
 
 }

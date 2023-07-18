@@ -5,7 +5,8 @@ const {
   putUser,
   deleteOneUser,
   infoUserById,
-  infoAllUsers
+  infoAllUsers,
+  restoreUserById
 } = require("../controllers/usersController");
 
 const createUser = async (req, res) => {
@@ -51,9 +52,11 @@ const getAllUsers = async(req, res) =>{
   }
 }
 
+
 const updateUser = async (req, res) => {
   try {
-    const { id, name, email, password, phone } = req.body;
+    const {id } = req.params;
+    const { name, email, password, phone } = req.body;
 
     const response = await putUser( {id, name, email, password, phone} );
 
@@ -63,6 +66,16 @@ const updateUser = async (req, res) => {
   }
 };
 
+const restoreUser = async(req, res) =>{
+  try {
+    const {id} = req.params;
+    const userRestore = await restoreUserById(id);
+    return res.status(200).json(userRestore);
+  } catch (error) {
+    return res.status(404).json({error: error.message})
+  }
+}
+
 
 
 
@@ -71,5 +84,6 @@ module.exports = {
   updateUser,
   deleteUser,
   getUser, 
-  getAllUsers
+  getAllUsers,
+  restoreUser
 };
