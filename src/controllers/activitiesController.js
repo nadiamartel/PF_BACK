@@ -1,4 +1,5 @@
 const { Activity, Store, Reservation,Review,User } = require("../db");
+const { Op } = require('sequelize');
 
 const postActivity = async ({
   id,
@@ -39,7 +40,7 @@ const postActivity = async ({
 const getActivityByName = async (name) => {
   try {
     const activity = await Activity.findAll({ 
-      where: { name: name.toLowerCase() },
+      where: { name: { [Op.like]: `%${name.toLowerCase()}%` } },
       include: [
         {
           model: Store,
