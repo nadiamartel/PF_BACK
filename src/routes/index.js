@@ -19,4 +19,5 @@ router.use("/reservations", reservationsRouter);
 router.use("/reviews", reviewsRouter);
 router.use('/create_preference', mercadopagoRouter);
 router.use("/emailReservation", emailReservationRouter);
+
 module.exports = router;
