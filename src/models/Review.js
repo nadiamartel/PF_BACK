@@ -15,6 +15,9 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    // userName: {} ???
-  });
+  },
+    {
+      paranoid: true
+    }
+  );
 };
