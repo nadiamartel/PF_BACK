@@ -228,10 +228,10 @@ const sendMailReservation = async (user) => {
     <div class="" style="font-size: 12px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 21.6px; color: #ffffff; line-height: 1.8;">
     <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Actividad:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">${user?.activity}</span></span></p>
     <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><span style="font-size:18px;"><strong><span style=""><u>Fecha:</u> </span></strong><span style="">${user?.date}</span></span></p>
-    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Horario:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">${user?.hour}hs</span></span></p>
+    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Horario:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">${user?.hour} hs.</span></span></p>
     <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Sucursal:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">${user?.store}</span></span></p>
     <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Direccion:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">${user?.storeAddress}</span></span></p>
-    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Costo:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">$${user?.cost}</span></span></p>
+    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Costo:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> $ </span></strong><span style="">${user?.cost}</span></span></p>
     <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Estado de Pago:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">Aprobado</span></span></p>
     </div>
     </div>
@@ -387,8 +387,7 @@ const sendMailReservation = async (user) => {
     </tbody>
     </table><!-- End -->
     </body>
-    </html>
-  `,
+    </html>`,
   });
   
   return
