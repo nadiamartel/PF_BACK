@@ -1,7 +1,7 @@
 const emailer = require('../emailer')
 
 
-const { createReservation, getAllReservations, deleteOneReservation, putReservation, postEmail } = require('../controllers/reservationsController')
+const { createReservation, getAllReservations, deleteOneReservation, putReservation, postEmail,getByName } = require('../controllers/reservationsController')
 
 const postReservation = async (req, res) => {
     const { idUser, idActivity, date, cost, hour } = req.body
@@ -16,11 +16,13 @@ const postReservation = async (req, res) => {
 
 const getReservations = async (req, res) => {
     try {
-        const reservations = await getAllReservations()
+        const { name } = req.query;
 
-        return res.status(200).json(reservations)
+        const result = name ? await getByName(name) : await getAllReservations();
+
+        return res.status(200).json(result)
     } catch (error) {
-        return res.status(400).json(error.message)
+        return res.status(400).json({error: error.message})
     }
 }
 
