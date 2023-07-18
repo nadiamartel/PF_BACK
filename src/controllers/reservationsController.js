@@ -1,5 +1,6 @@
 const { Reservation, User, Activity, Store } = require("../db");
-const emailer = require ('../emailer') 
+const emailer = require("../emailer");
+const { Op } = require("sequelize");
 
 const createReservation = async ({ idUser, idActivity, date, cost, hour }) => {
   const newReservation = await Reservation.create({
@@ -63,16 +64,45 @@ const putReservation = async ({ id }) => {
 
   return reservPut;
 };
-const postEmail = async ({ reservId, activity, date, hour,cost, user,store,storeAddress}) => {
-  console.log (user)
-  const foundUser = await User.findOne({where:{name:user}})
-  const emailUser = foundUser.email
-  const response = {reservId, activity, date, hour,cost, user,store,storeAddress,emailUser}
+const postEmail = async ({
+  reservId,
+  activity,
+  date,
+  hour,
+  cost,
+  user,
+  store,
+  storeAddress,
+}) => {
+  console.log(user);
+  const foundUser = await User.findOne({ where: { name: user } });
+  const emailUser = foundUser.email;
+  const response = {
+    reservId,
+    activity,
+    date,
+    hour,
+    cost,
+    user,
+    store,
+    storeAddress,
+    emailUser,
+  };
 
-  emailer.sendMailReservation(response)
+  emailer.sendMailReservation(response);
+};
 
-}
+const getByName = async (name) => {
+  const response = await getAllReservations();
 
+  const filterReservations = await response.filter((element) =>
+    element.user.name.toLowerCase().includes(name.toLowerCase())
+  );
+
+   if(filterReservations.length < 1) throw Error('No se encontro el nombre');
+
+  return filterReservations;
+};
 
 module.exports = {
   createReservation,
@@ -80,4 +110,5 @@ module.exports = {
   deleteOneReservation,
   putReservation,
   postEmail,
+  getByName
 };

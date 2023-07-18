@@ -4,7 +4,9 @@ const {
   postUser,
   putUser,
   deleteOneUser,
-  infoUserById
+  infoUserById,
+  infoAllUsers,
+  restoreUserById
 } = require("../controllers/usersController");
 
 const createUser = async (req, res) => {
@@ -40,20 +42,48 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const getAllUsers = async(req, res) =>{
+  try {
+    // const { name } = req.body;
+    const responseUsers = await infoAllUsers();
+    return res.status(200).json(responseUsers)
+  } catch (error) {
+    return res.status(404).send("Sin acceso a la informacion")
+  }
+}
+
+
 const updateUser = async (req, res) => {
   try {
-    const { id, name, email, password, phone } = req.body;
+    const {id } = req.params;
+    const { name, email, password, phone } = req.body;
 
-    const response = await putUser({ id, name, email, password, phone });
+    const response = await putUser( {id, name, email, password, phone} );
 
     return res.status(200).json(response);
   } catch (error) {
-    return res.status(400).json({ error: error.message });
+    return res.status(404).json({ error: error.message });
   }
 };
+
+const restoreUser = async(req, res) =>{
+  try {
+    const {id} = req.params;
+    const userRestore = await restoreUserById(id);
+    return res.status(200).json(userRestore);
+  } catch (error) {
+    return res.status(404).json({error: error.message})
+  }
+}
+
+
+
+
 module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  getUser
+  getUser, 
+  getAllUsers,
+  restoreUser
 };

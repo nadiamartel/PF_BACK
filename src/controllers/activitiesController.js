@@ -92,8 +92,27 @@ const getDetail = async (id) => {
   return found;
 };
 
+
+const putActivity = async ({id, description, cost, hours, days, players, age}) => {
+  const findActivity = await Activity.findByPk(id)
+
+  if(!findActivity) throw Error('Actividad no encontrada')
+
+  findActivity.description = description || findActivity.description
+  findActivity.cost = cost || findActivity.cost
+  findActivity.hours = hours || findActivity.hours
+  findActivity.days = days || findActivity.days
+  findActivity.players = players || findActivity.players
+  findActivity.age = age || findActivity.age
+
+  await findActivity?.save()
+
+  return {message: 'Info actualizada'}
+}
+
 module.exports = {
   postActivity,
   getActivityByName,
   getDetail,
+  putActivity
 };

@@ -1,25 +1,25 @@
 const { User, Reservation, Review } = require("../db");
 
-const postUser = async({id, name, email, password, phone}) => {
-    const [user, created] = await User.findOrCreate({
-      where: { email },
-      defaults: {
-        id,
-        name,
-        email,
-        password,
-        phone
-      },
-    });
-    
-    if (!created) throw Error("El usuario ya existe")
-    
-   return user;
+const postUser = async ({ id, name, email, password, phone }) => {
+  const [user, created] = await User.findOrCreate({
+    where: { email },
+    defaults: {
+      id,
+      name,
+      email,
+      password,
+      phone
+    },
+  });
+
+  if (!created) throw Error("El usuario ya existe")
+
+  return user;
 
 }
 
-const infoUserById = async(id) =>{
-  const users =  await User.findByPk(id, {
+const infoUserById = async (id) => {
+  const users = await User.findByPk(id, {
     include: [
       {
         model: Reservation,
@@ -41,7 +41,7 @@ const infoUserById = async(id) =>{
     ]
   });
 
-  if(!users) throw Error('Usuario no encontrado');
+  if (!users) throw Error('Usuario no encontrado');
 
   return users;
 }
@@ -57,23 +57,52 @@ const deleteOneUser = async ({ id }) => {
   return deleteUser;
 };
 
-const putUser = async ({ id, name, email, password, phone }) => {
-  const user = await User.findByPk(id);
+const infoAllUsers = async() =>{
+  const clients = await User.findAll({
+    where:{
+      client: true,
+    }
+  })
 
-  if (!user) throw Error("El usuario ya existe");
+  return clients;
+}
 
-  const newUpdate = user.update(
-    { name, email, password, phone },
-    { where: { id: id } }
-  );
+const putUser = async ({ id, name, password, phone, picture }) => {
+  if(!id) throw Error("Debe proporcionar un ID para realizar el cambio")
 
-  return newUpdate;
+  const userUpdate = await User.findByPk(id);
+  
+
+  if (userUpdate === null) throw Error("Debe ingresar un ID valido");
+  if (!userUpdate.client) throw Error("No se puede editar el usuario porque no es un cliente");
+
+  userUpdate.name= name || userUpdate.name;
+  userUpdate.password= password || userUpdate.password;
+  userUpdate.phone= phone || userUpdate.phone;
+  userUpdate.picture= picture || userUpdate.picture 
+
+  await userUpdate?.save();
+  
+  return  { message: "Informacion Actualizada!" };
 };
+
+const restoreUserById = async(id) => {
+  const restoredUser = await User.restore({ where: { id } });
+
+  if (!restoredUser) throw Error("El usuario no existe");
+
+  return restoredUser;
+};
+
+
+
 
 module.exports = {
   postUser,
   putUser,
   deleteOneUser,
-  infoUserById
+  infoUserById,
+  infoAllUsers,
+  restoreUserById
 };
 
