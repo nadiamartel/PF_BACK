@@ -1,4 +1,4 @@
-const emailer = require ('../emailer') 
+const emailer = require("../emailer");
 
 const {
   postUser,
@@ -6,14 +6,15 @@ const {
   deleteOneUser,
   infoUserById,
   infoAllUsers,
-  restoreUserById
+  restoreUserById,
+  getUserName,
 } = require("../controllers/usersController");
 
 const createUser = async (req, res) => {
   const { id, name, email, password, phone } = req.body;
   try {
     const response = await postUser({ id, name, email, password, phone });
-    emailer.sendMail(response)
+    emailer.sendMail(response);
     return res.status(200).json(response);
   } catch (error) {
     console.log(error);
@@ -21,15 +22,15 @@ const createUser = async (req, res) => {
   }
 };
 
-const getUser = async(req, res) =>{
+const getUser = async (req, res) => {
   const { id } = req.params;
   try {
     const getUserById = await infoUserById(id);
-    return res.status(200).json(getUserById)
+    return res.status(200).json(getUserById);
   } catch (error) {
-    return res.status(404).send("No se puedo encontrar el usuario")
+    return res.status(404).send("No se puedo encontrar el usuario");
   }
-}
+};
 
 const deleteUser = async (req, res) => {
   const { id } = req.params;
@@ -42,23 +43,22 @@ const deleteUser = async (req, res) => {
   }
 };
 
-const getAllUsers = async(req, res) =>{
+const getAllUsers = async (req, res) => {
   try {
     // const { name } = req.body;
     const responseUsers = await infoAllUsers();
-    return res.status(200).json(responseUsers)
+    return res.status(200).json(responseUsers);
   } catch (error) {
-    return res.status(404).send("Sin acceso a la informacion")
+    return res.status(404).send("Sin acceso a la informacion");
   }
-}
-
+};
 
 const updateUser = async (req, res) => {
   try {
-    const {id } = req.params;
+    const { id } = req.params;
     const { name, email, password, phone } = req.body;
 
-    const response = await putUser( {id, name, email, password, phone} );
+    const response = await putUser({ id, name, email, password, phone });
 
     return res.status(200).json(response);
   } catch (error) {
@@ -66,24 +66,32 @@ const updateUser = async (req, res) => {
   }
 };
 
-const restoreUser = async(req, res) =>{
+const restoreUser = async (req, res) => {
   try {
-    const {id} = req.params;
+    const { id } = req.params;
     const userRestore = await restoreUserById(id);
     return res.status(200).json(userRestore);
   } catch (error) {
-    return res.status(404).json({error: error.message})
+    return res.status(404).json({ error: error.message });
   }
-}
+};
 
-
-
+const getUserByName = async (req, res) => {
+  const { name } = req.params;
+  try {
+    const results = await getUserName(name)
+    return res.status(200).json(results);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
 
 module.exports = {
   createUser,
   updateUser,
   deleteUser,
-  getUser, 
+  getUser,
   getAllUsers,
-  restoreUser
+  restoreUser,
+  getUserByName,
 };
