@@ -1,4 +1,5 @@
 const { User, Reservation, Review } = require("../db");
+const { Op } = require('sequelize');
 
 const postUser = async ({ id, name, email, password, phone }) => {
   const [user, created] = await User.findOrCreate({
@@ -8,15 +9,14 @@ const postUser = async ({ id, name, email, password, phone }) => {
       name,
       email,
       password,
-      phone
+      phone,
     },
   });
 
-  if (!created) throw Error("El usuario ya existe")
+  if (!created) throw Error("El usuario ya existe");
 
   return user;
-
-}
+};
 
 const infoUserById = async (id) => {
   const users = await User.findByPk(id, {
@@ -25,27 +25,25 @@ const infoUserById = async (id) => {
         model: Reservation,
         include: [
           {
-            model: User
+            model: User,
           },
-        ]
+        ],
       },
       {
         model: Review,
         include: [
           {
-            model: User
+            model: User,
           },
-        ]
-      }
-
-    ]
+        ],
+      },
+    ],
   });
 
-  if (!users) throw Error('Usuario no encontrado');
+  if (!users) throw Error("Usuario no encontrado");
 
   return users;
-}
-
+};
 
 const deleteOneUser = async ({ id }) => {
   const deleteUser = await User.destroy({
@@ -57,36 +55,36 @@ const deleteOneUser = async ({ id }) => {
   return deleteUser;
 };
 
-const infoAllUsers = async() =>{
+const infoAllUsers = async () => {
   const clients = await User.findAll({
-    where:{
+    where: {
       client: true,
-    }
-  })
+    },
+  });
 
   return clients;
-}
-
-const putUser = async ({ id, name, password, phone, picture }) => {
-  if(!id) throw Error("Debe proporcionar un ID para realizar el cambio")
-
-  const userUpdate = await User.findByPk(id);
-  
-
-  if (userUpdate === null) throw Error("Debe ingresar un ID valido");
-  if (!userUpdate.client) throw Error("No se puede editar el usuario porque no es un cliente");
-
-  userUpdate.name= name || userUpdate.name;
-  userUpdate.password= password || userUpdate.password;
-  userUpdate.phone= phone || userUpdate.phone;
-  userUpdate.picture= picture || userUpdate.picture 
-
-  await userUpdate?.save();
-  
-  return  { message: "Informacion Actualizada!" };
 };
 
-const restoreUserById = async(id) => {
+const putUser = async ({ id, name, password, phone, picture }) => {
+  if (!id) throw Error("Debe proporcionar un ID para realizar el cambio");
+
+  const userUpdate = await User.findByPk(id);
+
+  if (userUpdate === null) throw Error("Debe ingresar un ID valido");
+  if (!userUpdate.client)
+    throw Error("No se puede editar el usuario porque no es un cliente");
+
+  userUpdate.name = name || userUpdate.name;
+  userUpdate.password = password || userUpdate.password;
+  userUpdate.phone = phone || userUpdate.phone;
+  userUpdate.picture = picture || userUpdate.picture;
+
+  await userUpdate?.save();
+
+  return { message: "Informacion Actualizada!" };
+};
+
+const restoreUserById = async (id) => {
   const restoredUser = await User.restore({ where: { id } });
 
   if (!restoredUser) throw Error("El usuario no existe");
@@ -94,8 +92,13 @@ const restoreUserById = async(id) => {
   return restoredUser;
 };
 
-
-
+const getUserName = async (name) => {
+  const userName = await User.findAll({
+    where: { name: { [Op.like]: `%${name.toLowerCase()}%` } }
+  });
+  if (!userName) throw Error("Nombre de usuario no encontrado");
+  return userName;
+};
 
 module.exports = {
   postUser,
@@ -103,6 +106,6 @@ module.exports = {
   deleteOneUser,
   infoUserById,
   infoAllUsers,
-  restoreUserById
+  restoreUserById,
+  getUserName,
 };
-
