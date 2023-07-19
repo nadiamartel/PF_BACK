@@ -29,7 +29,28 @@ const getAllStores = async () => {
   return allStores
 }
 
+const deleteStore = async (id) => {
+  const deleted = await Store.destroy({
+    where: {
+      id: id
+    },
+  });
+
+  return deleted;
+}
+
+const restoreStore = async (name) => {
+
+  const store = await Store.restore({where: {name: name.toLowerCase()}});
+
+  if(!store) throw Error('No se encontro la sucursal.');
+
+  return store;
+}
+
 module.exports = {
   postStore,
   getAllStores,
+  deleteStore,
+  restoreStore
 };
