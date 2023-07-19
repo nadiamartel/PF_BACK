@@ -104,11 +104,33 @@ const getByName = async (name) => {
   return filterReservations;
 };
 
+const getEmail = async (email) => {
+  // const response = await Reservation.findAll({
+  //   where: {}
+  // })
+  const response = await Reservation.findAll({
+    where: {},
+    include: [
+      {
+        model: User,
+        where: {
+          email: email
+        }
+      }
+    ]
+  });
+
+  if(!response) throw Error("Email no encontrado");
+  
+  return response
+}
+
 module.exports = {
   createReservation,
   getAllReservations,
   deleteOneReservation,
   putReservation,
   postEmail,
-  getByName
+  getByName,
+  getEmail
 };
