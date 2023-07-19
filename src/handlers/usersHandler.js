@@ -56,9 +56,9 @@ const getAllUsers = async(req, res) =>{
 const updateUser = async (req, res) => {
   try {
     const {id } = req.params;
-    const { name, email, password, phone } = req.body;
+    const { name, password, phone, picture } = req.body;
 
-    const response = await putUser( {id, name, email, password, phone} );
+    const response = await putUser( {id, name, picture, password, phone} );
 
     return res.status(200).json(response);
   } catch (error) {
