@@ -1,4 +1,4 @@
-const { postActivity, getActivityByName, getDetail, putActivity } = require("../controllers/activitiesController");
+const { postActivity, getActivityByName, getDetail, putActivity, deleteOneActivity, restoreOneActivity } = require("../controllers/activitiesController");
 const {Activity, Store} = require('../db')
 const createActivity = async (req, res) => {
   const { id, name, description, picture, cost, hours, days, store, age, players } = req.body;
@@ -68,9 +68,34 @@ const updateActivity = async (req, res) => {
   }
 }
 
+const deleteActivity = async (req, res) => {
+  try {
+    const {id} = req.params
+    const deleteAct = await deleteOneActivity(id)
+
+    return res.status(200).json('Actividad borrada!')
+  } catch (error) {
+    return res.status(400).json({error: error.message})
+  }
+}
+
+const restoreActivity = async (req, res) =>{
+  try {
+    const {name} = req.params
+
+    const restoreAct = await restoreOneActivity(name)
+
+    return res.status(200).json('Actividad restaurada!')
+  } catch (error) {
+    return res.status(400).json({error: error.message})
+  }
+}
+
 module.exports = {
   createActivity,
   getActivities,
   getActivityById,
-  updateActivity
+  updateActivity,
+  deleteActivity,
+  restoreActivity
 };

@@ -110,9 +110,32 @@ const putActivity = async ({id, description, cost, hours, days, players, age}) =
   return {message: 'Info actualizada'}
 }
 
+const deleteOneActivity = async (id) => {
+  const deleteAct = await Activity.destroy({
+    where: {
+      id: id,
+    },
+  });
+
+  if(!deleteAct) throw Error('La actividad no existe!')
+
+  return deleteAct
+}
+
+const restoreOneActivity = async (name) => {
+  
+  const restoreAct = await Activity.restore({ where: { name: name.toLowerCase() } })
+
+  if (!restoreAct) throw Error("La actividad no existe");
+
+  return restoreAct
+}
+
 module.exports = {
   postActivity,
   getActivityByName,
   getDetail,
-  putActivity
+  putActivity,
+  deleteOneActivity,
+  restoreOneActivity
 };
