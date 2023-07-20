@@ -3,6 +3,16 @@ const emailer = require("../emailer");
 const { Op } = require("sequelize");
 
 const createReservation = async ({ idUser, idActivity, date, cost, hour }) => {
+  const userFound = await User.findByPk(idUser)
+
+  if (!userFound) throw Error('El usuario no existe')
+
+  const activityFound = await Activity.findByPk(idActivity)
+
+  if (!activityFound) throw Error('La actividad no existe')
+
+  if(!idUser || !idActivity || !date || !cost || !hour) throw Error('Faltan datos')
+
   const newReservation = await Reservation.create({
     date,
     hour,
@@ -44,6 +54,10 @@ const getAllReservations = async () => {
 };
 
 const deleteOneReservation = async ({ id }) => {
+  const reservation = await Reservation.findByPk(id);
+
+  if (!reservation) throw Error("No se encontró la reserva");
+
   const deleteReservation = await Reservation.destroy({
     where: {
       id,
@@ -98,7 +112,7 @@ const getByName = async (name) => {
   const filterReservations = await response.filter((element) =>
     element.user.name.toLowerCase().includes(name.toLowerCase())
   );
-
+  console.log(filterReservations);
    if(filterReservations.length < 1) throw Error('No se encontro el nombre');
 
   return filterReservations;
