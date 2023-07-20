@@ -19,8 +19,7 @@ const createActivity = async (req, res) => {
 
     return res.status(200).json(response);
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ error: error.message });
+    return res.status(404).json({ error: error.message });
   }
 };
 
@@ -37,9 +36,9 @@ const getActivities = async (req, res) => {
               }
           }
       })
-      results && res.status(200).json(results)
+      results.length && res.status(200).json(results)
   } catch (error) {
-      return res.status(500).json({error: error.message})
+      return res.status(404).json({error: error.message})
   }
 }
 
@@ -62,7 +61,7 @@ const updateActivity = async (req, res) => {
 
     const editActivity = await putActivity({id, description, cost, hours, days, players, age})
 
-    return res.status(200).send('Actividad modificada!')
+    return res.status(200).json('Actividad modificada!')
   } catch (error) {
     return res.status(400).json({error: error.message})
   }

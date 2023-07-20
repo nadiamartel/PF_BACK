@@ -13,11 +13,12 @@ const postActivity = async ({
   age,
   players,
 }) => {
+  const toLowerCaseName = name.toLowerCase();
   const [activity, created] = await Activity.findOrCreate({
-    where: { name },
+    where: { name: toLowerCaseName },
     defaults: {
       id,
-      name: name.toLowerCase(),
+      name:  toLowerCaseName,
       description,
       picture,
       cost,
@@ -29,7 +30,7 @@ const postActivity = async ({
   });
 
   if (!created) {
-    throw Error("Activity already exists");
+    throw Error("La Actividad ya existe!");
   }
   
   await activity.addStores(store);
@@ -50,8 +51,8 @@ const getActivityByName = async (name) => {
           }
         }
       ]
-    });;
-    if (!activity) throw Error("Activity not found!");
+    });
+    if (!activity.length) throw Error("Activity not found!");
     return activity;
   } catch (error) {
     throw Error(error.message);

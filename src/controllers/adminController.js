@@ -10,6 +10,6 @@ const infoAllAdmin = async() =>{
     return admin;
   }
 
-  module.exports ={
+module.exports = {
     infoAllAdmin
-  }
+}
