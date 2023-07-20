@@ -11,9 +11,9 @@ const {
 } = require("../controllers/usersController");
 
 const createUser = async (req, res) => {
-  const { id, name, password, phone, picture } = req.body;
+  const { id, name,email, password, phone} = req.body;
   try {
-    const response = await postUser({ id, name, password, phone, picture });
+    const response = await postUser({ id, name,email, password, phone });
     emailer.sendMail(response);
     return res.status(200).json(response);
   } catch (error) {
@@ -56,9 +56,9 @@ const getAllUsers = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email, password, phone } = req.body;
+    const { name,  password, phone ,picture} = req.body;
 
-    const response = await putUser({ id, name, email, password, phone });
+    const response = await putUser({ id, name, password, phone ,picture});
 
     return res.status(200).json(response);
   } catch (error) {
