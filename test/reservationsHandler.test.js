@@ -3,6 +3,19 @@ const server = require('../src/app')
 
 describe('Reservations Handler', () => {
     describe('Post reservations', () => {
+        it('Creacion de reserva con exito', async () => {
+            const reservation = {
+                date: "Miércoles 25/07/2025",
+                hour: "13-16",
+                idUser: "1",
+                idActivity: "1"
+            }
+            const response = await request(server)
+            .post('/reservations')
+            .send(reservation)
+
+            expect(response.status).toBe(200)
+        })
         it('Comprobacion de que no falten datos', async () => {
             const reservation = {
                 date: "miercoles 25/07/2023",
@@ -59,13 +72,20 @@ describe('Reservations Handler', () => {
 
             expect(response.status).toBe(200)
         })
-/*         it('Traer todas las reservas de un usuario cuando se le pasa un nombre por query', async () => {
+        it('No hay reservar realizadas', async () => {
+            const response = await request(server)
+            .get('/reservations')
+
+            expect(response.status).toBe(400)
+            expect(response.body.error).toBe("No hay reservas hechas!")
+        })
+        it('Traer todas las reservas de un usuario cuando se le pasa un nombre por query', async () => {
             const response = await request(server)
             .get('/reservations?name=mati love')
             
             expect(response.status).toBe(200)
             expect(response.body.length).toBe(1)
-        }) */
+        })
         it('No hay reservas', async () => {
             const response = await request(server)
             .get('/reservations?name=robertito')
@@ -74,13 +94,13 @@ describe('Reservations Handler', () => {
         })
     })
     describe('Delete reservations', () => {
-/*         it('Eliminar una reservation por Id', async () => {
+        it('Eliminar una reservation por Id', async () => {
             const response = await request(server)
             .delete('/reservations/16')
 
             expect(response.status).toBe(200)
             expect(response.body.message).toBe("Reservacion eliminada exitosamente")
-        }) */
+        })
         it('No existe una reservation con esa Id', async () => {
             const response = await request(server)
             .delete('/reservations/1000453')
