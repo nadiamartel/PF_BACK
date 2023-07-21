@@ -46,6 +46,10 @@ const infoUserById = async (id) => {
 };
 
 const deleteOneUser = async ({ id }) => {
+  const found = await User.findByPk(id)
+
+  if(!found) throw Error("No se encontro el usuario")
+
   const deleteUser = await User.destroy({
     where: {
       id: id,
