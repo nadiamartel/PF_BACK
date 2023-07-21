@@ -8,7 +8,6 @@ const createReview = async (req, res) => {
 
         return res.status(200).send('Reseña creada!')
     } catch (error) {
-        console.log(error);
         return res.status(400).json({error: error.message})
     }
 }
