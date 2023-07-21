@@ -1,23 +1,33 @@
 /* const { expect } = require('chai'); */
 const request = require('supertest');
-const server = require('../src/app'); // Reemplaza 'tu_app' con el archivo donde está configurado Express y tus rutas.
+const server = require('../src/app'); 
+const {Activity} = require('../src/db');
 
-const {
-  createActivity,
-  getActivities,
-  getActivityById,
-  updateActivity,
-  deleteActivity,
-  restoreActivity,
-} = require('../src/handlers/activitiesHandler');
 
 describe('Activities Controller', () => {
   // Prueba para createActivity
+
+
+  let createdReservationId;
+
+    afterEach(async ()=>{
+        if (createdReservationId) {
+            try {
+                // Eliminar la reservación creada durante el test
+                await Activity.destroy({ where: { id: createdReservationId }, force: true });
+            } catch (error) {
+                console.error('Error eliminando la reservación:', error);
+            }
+        }
+    })
+
+
+
   describe('createActivity', () => {
     it('Crear una nueva actividad', async () => {
       const requestBody = {
         // Coloca aquí los datos de prueba que deseas enviar en el body.
-        name: "mario bros",
+        name: "judo",
         description: "actividad entretenida",
         picture: ["https://res.cloudinary.com/dwdosvfpx/image/upload/v1688778408/zqi3ybeaojqcqnwhnvrp.jpg"],
         cost: "3000",
@@ -32,7 +42,9 @@ describe('Activities Controller', () => {
         .post('/activities')
         .send(requestBody);
 
+
       expect(response.status).toBe(200);
+      createdReservationId = response.body.id;
       // Aquí puedes hacer más aserciones sobre la respuesta si es necesario.
     });
 
@@ -103,13 +115,7 @@ describe('Activities Controller', () => {
     describe('updateActivity', function () {
         it('Modificar una actividad', async () => {
             const requestBody = {
-                
-                description: "actividad entretenida",
-                cost: "3005",
-                hours: ["10-11", "11-12", "12-13","13-14","14-15","15-16","16-17","17-18"],
                 days: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-                age: ["Adultos"],
-                players: ["2-4","4-8","+8"],
               };
 
             const response = await request(server)
@@ -121,13 +127,7 @@ describe('Activities Controller', () => {
         })
         it('Si la actividad no existe que arroje error', async () => {
             const requestBody = {
-                
-                description: "actividad entretenida",
-                cost: "3000",
-                hours: ["10-11", "11-12", "12-13","13-14","14-15","15-16","16-17","17-18"],
                 days: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
-                age: ["Adultos"],
-                players: ["2-4","4-8","+8"],
               };
             const response = await request(server)
             .put('/activities/1000')
@@ -141,7 +141,7 @@ describe('Activities Controller', () => {
     describe('deleteActivity', function () {
         it('Eliminar una actividad', async () => {
             const response = await request(server)
-            .delete('/activities/48')
+            .delete('/activities/1')
 
             expect(response.status).toBe(200)
             expect(response.body).toStrictEqual('Actividad borrada!')
@@ -157,7 +157,7 @@ describe('Activities Controller', () => {
     describe('restoreActivity', function () {
             it('Restaurar una actividad', async () => {
                 const response = await request(server)
-               .put('/activities/criquet/restore')
+               .put('/activities/futbol/restore')
                
                 expect(response.status).toBe(200)
             })

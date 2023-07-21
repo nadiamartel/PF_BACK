@@ -7,10 +7,10 @@ const getAllAdmin = async(req, res) =>{
       const responseUsers = await infoAllAdmin();
       return res.status(200).json(responseUsers)
     } catch (error) {
-      return res.status(404).send("Sin acceso a la informacion del administrador")
+      return res.status(404).json({error: error.message})
     }
   }
-
-  module.exports ={
+  
+  module.exports = {
     getAllAdmin
   }

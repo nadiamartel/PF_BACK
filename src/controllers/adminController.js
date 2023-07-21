@@ -6,6 +6,7 @@ const infoAllAdmin = async() =>{
         client: false,
       }
     })
+    if(!admin) throw Error("Sin acceso a la informacion del administrador")
   
     return admin;
   }
