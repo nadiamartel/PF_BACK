@@ -12,7 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Install Dependencies
+        run: npm install
       - name: Run Tests
-        run: |
-          npm install 
-          npm test
+        env:
+          DB_DEPLOY: ${{ secrets.DB_DEPLOY }}
+        run: npm test
