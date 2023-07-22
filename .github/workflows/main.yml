@@ -10,6 +10,8 @@ on:
 jobs:
   Jest:
     runs-on: ubuntu-latest
+    env: 
+      DB_DEPLOY: ${{ secrets.DB_DEPLOY }}
     steps:
       - uses: actions/checkout@v1
 
@@ -17,6 +19,6 @@ jobs:
         run: npm install --force
       - name: Runs Tests 
         run: 
+          echo "URL -> $DB_DEPLOY"
           npm test
-        env: 
-          DB_DEPLOY: ${{secrets.DB_DEPLOY}}
+
