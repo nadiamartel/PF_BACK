@@ -16,7 +16,7 @@ jobs:
       - name: INSTALL DEPENDENCES
         run: npm install --force
       - name: Runs Tests 
-        env: 
-          DB_DEPLOY: ${{secrets.DB_DEPLOY}}
         run: 
           npm test
+        env: 
+          DB_DEPLOY: ${{secrets.DB_DEPLOY}}
