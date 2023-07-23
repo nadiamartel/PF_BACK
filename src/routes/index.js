@@ -10,6 +10,7 @@ const reviewsRouter = require("./reviews")
 const mercadopagoRouter = require('./mercadoPago')
 const emailReservationRouter =require ('./emailReservation')
 const adminRouter = require("./admin")
+const refundRouter = require("./refund")
 
 router.use("/activities", activitiesRouter);
 router.use("/stores", storeRouter);
@@ -20,6 +21,7 @@ router.use("/reservations", reservationsRouter);
 router.use("/reviews", reviewsRouter);
 router.use('/create_preference', mercadopagoRouter);
 router.use("/emailReservation", emailReservationRouter);
-router.use("/admin", adminRouter)
+router.use("/admin", adminRouter);
+router.use("/refund", refundRouter);
 
 module.exports = router;
