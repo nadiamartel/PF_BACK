@@ -16,7 +16,7 @@ const postEmailRefund = async (req, res) => {
       });
       return res.status(200).json({ message: "email enviado" });
     } catch (error) {
-      return res.status(400).json("este es el error",{ error: error.message });
+      return res.status(400).json({ error: error.message });
     }
   };
 
