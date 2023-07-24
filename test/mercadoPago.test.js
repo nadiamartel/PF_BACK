@@ -30,7 +30,6 @@ describe('POST /mercadopago', () => {
   
       // Asegúrate de que el código de respuesta sea 400
       expect(response.status).toBe(400);
-      console.log(response.body);
       // Asegúrate de que el cuerpo de la respuesta contenga el mensaje de error
       /* expect(response.body).toHaveProperty('message'); */
     });

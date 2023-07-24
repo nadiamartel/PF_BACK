@@ -88,7 +88,6 @@ const postEmail = async ({
   store,
   storeAddress,
 }) => {
-  console.log(user);
   const foundUser = await User.findOne({ where: { name: user } });
   const emailUser = foundUser.email;
   const response = {
