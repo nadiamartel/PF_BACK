@@ -11,7 +11,7 @@ jobs:
   Jest:
     runs-on: ubuntu-latest
     env: 
-      DB_DEPLOY: ${{ secrets.DB_DEPLOY }}
+      process.env.DB_DEPLOY: ${{ secrets.DB_DEPLOY }}
     steps:
       - uses: actions/checkout@v1
 
