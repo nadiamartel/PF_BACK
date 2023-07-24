@@ -19,6 +19,5 @@ jobs:
         run: npm install --force
       - name: Runs Tests 
         run: 
-          echo "URL -> $DB_DEPLOY"
           npm test
 
