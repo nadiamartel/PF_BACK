@@ -32,7 +32,7 @@ describe('Users Handler', () => {
 
             expect(response.status).toBe(200)
             createdUserId = response.body.id;
-         })
+         },10000)
          it('Deberia devolver un error cuando ya hay un usuario con el email ingresado', async () => {
             const newUser = {
                 id: "121414",
@@ -120,6 +120,18 @@ describe('Users Handler', () => {
             .send(putUser)
 
             expect(response.status).toBe(404)
+            expect(response.body.error).toBe("Debe proporcionar un ID para realizar el cambio");
+        })
+        it('deberia arrojar un error si el usuario es un administrador', async ()=>{
+            const putUser ={
+                phone: '343435353'
+            }
+            const response = await request(server)
+            .put('/users/1')
+            .send(putUser);
+
+            expect(response.status).toBe(404)
+            expect(response.body.error).toBe("No se puede editar el usuario porque no es un cliente");
         })
     })
     describe('Restore User', () => {
@@ -146,7 +158,7 @@ describe('Users Handler', () => {
         })
         it('Deberia devolver un error si no existe el usuario', async () => {
             const response = await request(server)
-            .get('/users/robertito/name')
+            .get('/users/15/name')
 
             expect(response.status).toBe(500)
         })
