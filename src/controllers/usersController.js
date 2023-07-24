@@ -75,8 +75,7 @@ const putUser = async ({ id, name, password, phone, picture }) => {
   const userUpdate = await User.findByPk(id);
 
   if (userUpdate === null) throw Error("Debe ingresar un ID valido");
-  if (!userUpdate.client)
-    throw Error("No se puede editar el usuario porque no es un cliente");
+  if (!userUpdate.client)  throw Error("No se puede editar el usuario porque no es un cliente");
 
   userUpdate.name = name || userUpdate.name;
   userUpdate.password = password || userUpdate.password;
@@ -97,10 +96,13 @@ const restoreUserById = async (id) => {
 };
 
 const getUserName = async (name) => {
+  console.log(name);
   const userName = await User.findAll({
-    where: { name: { [Op.like]: `%${name.toLowerCase()}%` } }
+    where: { name: { [Op.iLike]: `%${name}%` } }
   });
-  if (!userName) throw Error("Nombre de usuario no encontrado");
+
+  if (!userName.length) throw Error("Nombre de usuario no encontrado");
+  console.log(userName);
   return userName;
 };
 

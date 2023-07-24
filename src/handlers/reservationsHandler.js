@@ -6,7 +6,6 @@ const {
   deleteOneReservation,
   putReservation,
   postEmail,
-  getByName,
   getEmail
 } = require("../controllers/reservationsController");
 
@@ -29,9 +28,7 @@ const postReservation = async (req, res) => {
 
 const getReservations = async (req, res) => {
   try {
-    const { name } = req.query;
-
-    const result = name ? await getByName(name) : await getAllReservations();
+    const result = await getAllReservations();
 
     return res.status(200).json(result);
   } catch (error) {

@@ -7,7 +7,7 @@ const postLoginGoogle = async({email, googleId, name}) =>{
     const user = await User.findOrCreate({ 
         where: { email },
         defaults: {
-            name: name,
+            name: name.toLowerCase(),
             email,
             password: googleId,
         } 
