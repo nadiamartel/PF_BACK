@@ -116,7 +116,7 @@ describe('Users Handler', () => {
                 phone: "0532532575235"
             }
             const response = await request(server)
-            .put('/users')
+            .put('/users/a')
             .send(putUser)
 
             expect(response.status).toBe(404)

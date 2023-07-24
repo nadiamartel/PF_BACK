@@ -70,7 +70,7 @@ const infoAllUsers = async () => {
 };
 
 const putUser = async ({ id, name, password, phone, picture }) => {
-  if (!id) throw Error("Debe proporcionar un ID para realizar el cambio");
+  if (!id || isNaN(id)) throw Error("Debe proporcionar un ID para realizar el cambio");
 
   const userUpdate = await User.findByPk(id);
 
