@@ -11,9 +11,9 @@ jobs:
   Jest:
     runs-on: ubuntu-latest
     env: 
-      process.env.DB_DEPLOY: ${{ secrets.DB_DEPLOY }}
+      DB_DEPLOY: ${{ secrets.DB_DEPLOY }}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@develop
 
       - name: INSTALL DEPENDENCES
         run: npm install --force
