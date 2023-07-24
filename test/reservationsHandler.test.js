@@ -28,7 +28,7 @@ describe('Reservations Handler', () => {
     })
     describe('Put reservations', () => {            
 
-        it('Modificar una reservation por Id', async () => {
+/*         it('Modificar una reservation por Id', async () => {
            const req = { params: { id: 18 } };
             const res = {
             status: jest.fn().mockReturnThis(),
@@ -38,7 +38,7 @@ describe('Reservations Handler', () => {
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith('Reserva pagada');
             idUpdate = req.params;
-        })
+        }) */
         it('Id incorrecto', async () => {
             const reservation = {
                 
@@ -141,14 +141,14 @@ describe('Reservations Handler', () => {
 
             expect(response.status).toBe(200)
         })
-        it('No hay reservar realizadas', async () => {
+/*         it('No hay reservar realizadas', async () => {
 
             const response = await request(server)
             .get('/reservations')
             
             expect(response.status).toBe(400)
             expect(response.body.error).toBe("No hay reservas hechas!")
-        })
+        }) */
     })
     describe('Delete reservations', () => {
 

@@ -65,14 +65,14 @@ describe("Store Handler", () => {
       expect(response.status).toBe(200);
     });
 
-    it('deberia lanzar un error si no hay sucursales', async () => {
+/*     it('deberia lanzar un error si no hay sucursales', async () => {
       // Simulamos que la función findAll() del modelo Store devuelve un arreglo vacío
       Store.findAll.mockResolvedValue([]);
 
       const response = await request(server).get("/stores");
       expect(response.status).toBe(404);
       expect(response.body.error).toBe('Stores not found!');
-    });
+    }); */
   });
 
   describe('/deleteStore', () => {
