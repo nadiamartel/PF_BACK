@@ -7,8 +7,8 @@ describe('Reservations Handler', () => {
     
     describe('Get by Email', () => {
         it('Trae todas las reservas de un usuario', async () => {
-            const response = await request(server).get('/reservations/sosodubrowsky@gmail.com/email');
-            /* console.log(response.body); */
+            const response = await request(server).get('/reservations/sportiverse@gmail.com/email');
+
             expect(response.status).toBe(200)
         },15000)
         it('No se encontraron reservas', async () => {

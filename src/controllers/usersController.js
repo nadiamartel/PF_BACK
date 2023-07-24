@@ -96,13 +96,11 @@ const restoreUserById = async (id) => {
 };
 
 const getUserName = async (name) => {
-  console.log(name);
   const userName = await User.findAll({
     where: { name: { [Op.iLike]: `%${name}%` } }
   });
 
   if (!userName.length) throw Error("Nombre de usuario no encontrado");
-  console.log(userName);
   return userName;
 };
 
