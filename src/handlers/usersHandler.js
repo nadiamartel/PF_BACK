@@ -8,6 +8,7 @@ const {
   infoAllUsers,
   restoreUserById,
   getUserName,
+  banUsers
 } = require("../controllers/usersController");
 
 const createUser = async (req, res) => {
@@ -85,6 +86,15 @@ const getUserByName = async (req, res) => {
   }
 };
 
+const getUsersBan = async (req, res) => {
+  try {
+    const response = await banUsers()
+    return res.status(200).json(response)
+  } catch (error) {
+    return res.status(400).json({error: error.message})
+  }
+}
+
 module.exports = {
   createUser,
   updateUser,
@@ -93,4 +103,5 @@ module.exports = {
   getAllUsers,
   restoreUser,
   getUserByName,
+  getUsersBan
 };
