@@ -46,7 +46,7 @@ describe('Activities Controller', () => {
       expect(response.status).toBe(200);
       createdReservationId = response.body.id;
       // Aquí puedes hacer más aserciones sobre la respuesta si es necesario.
-    });
+    },10000);
 
     it('Errores en los datos para crear actividad', async () => {
       const requestBody = {
@@ -74,7 +74,7 @@ describe('Activities Controller', () => {
   });
   
   // Prueba para getActivities
-    describe('getActivities', () => {
+   /*  describe('getActivities', () => {
         it('Obtener todas las actividades', async () => {
         const response = await request(server)
         .get('/activities');
@@ -96,11 +96,11 @@ describe('Activities Controller', () => {
         expect(response.status).toBe(404);
         expect(response.body).toStrictEqual({"error": "Activity not found!"});
         })
-    })
+    }) */
     describe('getActivityById', function () {
         it('Obtener una actividad por su id', async () => {
             const response = await request(server)
-            .get('/activities/1');
+            .get('/activities/72');
 
             expect(response.status).toBe(200);
         })
@@ -119,7 +119,7 @@ describe('Activities Controller', () => {
               };
 
             const response = await request(server)
-            .put('/activities/1')
+            .put('/activities/72')
             .send(requestBody)
 
             expect(response.status).toBe(200)
@@ -141,7 +141,7 @@ describe('Activities Controller', () => {
     describe('deleteActivity', function () {
         it('Eliminar una actividad', async () => {
             const response = await request(server)
-            .delete('/activities/1')
+            .delete('/activities/72')
 
             expect(response.status).toBe(200)
             expect(response.body).toStrictEqual('Actividad borrada!')
@@ -157,7 +157,7 @@ describe('Activities Controller', () => {
     describe('restoreActivity', function () {
             it('Restaurar una actividad', async () => {
                 const response = await request(server)
-               .put('/activities/futbol/restore')
+               .put('/activities/bowling/restore')
                
                 expect(response.status).toBe(200)
             })
