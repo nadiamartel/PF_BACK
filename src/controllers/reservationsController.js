@@ -56,7 +56,7 @@ const getAllReservations = async () => {
 const deleteOneReservation = async ({ id }) => {
   const reservation = await Reservation.findByPk(id);
 
-  if (!reservation) throw Error("No se encontró la reserva");
+  if (reservation.length < 1) throw Error("No se encontró la reserva");
 
   const deleteReservation = await Reservation.destroy({
     where: {
@@ -88,7 +88,6 @@ const postEmail = async ({
   store,
   storeAddress,
 }) => {
-  console.log(user);
   const foundUser = await User.findOne({ where: { name: user } });
   const emailUser = foundUser.email;
   const response = {
@@ -106,37 +105,27 @@ const postEmail = async ({
   emailer.sendMailReservation(response);
 };
 
-const getByName = async (name) => {
-  const response = await getAllReservations();
-
-  const filterReservations = await response.filter((element) =>
-    element.user.name.toLowerCase().includes(name.toLowerCase())
-  );
-  console.log(filterReservations);
-   if(filterReservations.length < 1) throw Error('No se encontro el nombre');
-
-  return filterReservations;
-};
-
 const getEmail = async (email) => {
-  // const response = await Reservation.findAll({
-  //   where: {}
-  // })
-  const response = await Reservation.findAll({
-    where: {},
-    include: [
-      {
-        model: User,
-        where: {
-          email: email
-        }
-      }
-    ]
-  });
+  const foundUser = await User.findOne({
+   where: { email }
+   })
+   if (!foundUser) throw Error('No existe un usuario con ese email')
 
-  if(!response) throw Error("Email no encontrado");
-  
-  return response
+   const response = await Reservation.findAll({
+   where: {},
+   include: [
+     {
+       model: User,
+       where: {
+         email: email
+       }
+     }
+   ]
+ });
+
+ if(!response.length) throw Error("El usuario no tiene reservas hechas");
+
+ return response
 }
 
 module.exports = {
@@ -145,6 +134,5 @@ module.exports = {
   deleteOneReservation,
   putReservation,
   postEmail,
-  getByName,
   getEmail
 };

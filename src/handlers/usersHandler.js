@@ -8,16 +8,16 @@ const {
   infoAllUsers,
   restoreUserById,
   getUserName,
+  banUsers
 } = require("../controllers/usersController");
 
 const createUser = async (req, res) => {
-  const { id, name,email, password, phone} = req.body;
+  const { id, name,email, password, phone, client} = req.body;
   try {
-    const response = await postUser({ id, name,email, password, phone });
-    emailer.sendMail(response);
-    return res.status(200).json(response);
+    const response = await postUser({ id, name,email, password, phone, client });
+/*     emailer.sendMail(response);
+ */    return res.status(200).json(response);
   } catch (error) {
-    console.log(error);
     return res.status(400).json({ error: error.message });
   }
 };
@@ -86,6 +86,15 @@ const getUserByName = async (req, res) => {
   }
 };
 
+const getUsersBan = async (req, res) => {
+  try {
+    const response = await banUsers()
+    return res.status(200).json(response)
+  } catch (error) {
+    return res.status(400).json({error: error.message})
+  }
+}
+
 module.exports = {
   createUser,
   updateUser,
@@ -94,4 +103,5 @@ module.exports = {
   getAllUsers,
   restoreUser,
   getUserByName,
+  getUsersBan
 };

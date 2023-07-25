@@ -1,7 +1,7 @@
 const { User, Reservation, Review } = require("../db");
 const { Op } = require('sequelize');
 
-const postUser = async ({ id, name, email, password, phone }) => {
+const postUser = async ({ id, name, email, password, phone, client }) => {
   const [user, created] = await User.findOrCreate({
     where: { email },
     defaults: {
@@ -10,6 +10,7 @@ const postUser = async ({ id, name, email, password, phone }) => {
       email,
       password,
       phone,
+      client
     },
   });
 
@@ -70,13 +71,12 @@ const infoAllUsers = async () => {
 };
 
 const putUser = async ({ id, name, password, phone, picture }) => {
-  if (!id) throw Error("Debe proporcionar un ID para realizar el cambio");
+  if (!id || isNaN(id)) throw Error("Debe proporcionar un ID para realizar el cambio");
 
   const userUpdate = await User.findByPk(id);
 
   if (userUpdate === null) throw Error("Debe ingresar un ID valido");
-  if (!userUpdate.client)
-    throw Error("No se puede editar el usuario porque no es un cliente");
+  if (!userUpdate.client)  throw Error("No se puede editar el usuario porque no es un cliente");
 
   userUpdate.name = name || userUpdate.name;
   userUpdate.password = password || userUpdate.password;
@@ -98,11 +98,22 @@ const restoreUserById = async (id) => {
 
 const getUserName = async (name) => {
   const userName = await User.findAll({
-    where: { name: { [Op.like]: `%${name.toLowerCase()}%` } }
+    where: { name: { [Op.iLike]: `%${name}%` } }
   });
-  if (!userName) throw Error("Nombre de usuario no encontrado");
+
+  if (!userName.length) throw Error("Nombre de usuario no encontrado");
   return userName;
 };
+
+const banUsers = async () => {
+  const usersBan = await User.findAll({paranoid: false})
+
+  const filterUsersBan = await usersBan.filter(user => user.deletedAt !== null)
+
+  if(!filterUsersBan.length) throw Error('No hay usuarios baneados')
+
+  return filterUsersBan
+}
 
 module.exports = {
   postUser,
@@ -112,4 +123,5 @@ module.exports = {
   infoAllUsers,
   restoreUserById,
   getUserName,
+  banUsers
 };

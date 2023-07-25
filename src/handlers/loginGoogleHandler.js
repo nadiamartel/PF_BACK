@@ -13,7 +13,7 @@ const loginGoogle = async (req, res) => {
 
   } catch (error) {
 
-    return res.status(500).json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 };
 

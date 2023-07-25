@@ -8,6 +8,7 @@ const {
   getAllUsers,
   restoreUser,
   getUserByName,
+  getUsersBan,
 } = require("../handlers/usersHandler");
 
 usersRouter
@@ -17,6 +18,7 @@ usersRouter
   .get("/:id", getUser)
   .get("/", getAllUsers) //solo usuarios clientes
   .put("/:id/restore", restoreUser)
-  .get("/:name/name", getUserByName);
+  .get("/:name/name", getUserByName)
+  .get("/ban/users", getUsersBan);
 
 module.exports = usersRouter;
