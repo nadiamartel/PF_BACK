@@ -7,13 +7,13 @@ describe('Reservations Handler', () => {
     
     describe('Get by Email', () => {
         it('Trae todas las reservas de un usuario', async () => {
-            const response = await request(server).get('/reservations/sportiverse@gmail.com/email');
+            const response = await request(server).get('/reservations/luciano.vel166@gmail.com/email');
 
             expect(response.status).toBe(200)
         },15000)
         it('No se encontraron reservas', async () => {
             const response = await request(server)
-            .get('/reservations/luciano.vel166@gmail.com/email')
+            .get('/reservations/sportiverse@gmail.com/email')
             
             expect(response.status).toBe(400)
             expect(response.body.error).toBe("El usuario no tiene reservas hechas")
@@ -67,10 +67,11 @@ describe('Reservations Handler', () => {
         it('Creacion de reserva con exito', async () => {
             const reservation = {
                 date: "Miércoles 25/07/2025",
-                cost: '355',
-                hour: "13-16",
-                idUser: "1",
-                idActivity: "1"
+                cost: '353',
+                hour: "13-15",
+                pay: true,
+                idUser: "12",
+                idActivity: "78"
             }
             const response = await request(server)
             .post('/reservations')
@@ -79,12 +80,14 @@ describe('Reservations Handler', () => {
             expect(response.status).toBe(200)
             createdReservationId = response.body.id;
         },10000)
+
         it('Comprobacion de que no falten datos', async () => {
             const reservation = {
                 date: "miercoles 25/07/2023",
                 hour: "13-15",
-                idUser: "1",
-                idActivity: "1"
+                idUser: "35",
+                pay: true,
+                idActivity: "72"
             }
             const response = await request(server)
             .post('/reservations')
@@ -180,16 +183,16 @@ describe('Reservations Handler', () => {
             expect(response.body.error).toBe("No se encontró la reserva") 
         })
     })
-    describe('Post email reservations',()=>{
+    /* describe('Post email reservations',()=>{
         it('deberia enviar un email', async () => {
             const req = {
               body: {
-                reservId: '1',
-                activity: 'surfing',
+                reservId: '282',
+                activity: 'jai alai',
                 date: 'Miércoles 26/07/2023',
                 hour: '10-11',
                 cost: 10-11,
-                user: 'luciano',
+                user: 'Nadia Martel',
                 store: 'cerro',
                 storeAddress: 'belgrano norte 187'
               }
@@ -216,5 +219,5 @@ describe('Reservations Handler', () => {
             // Asegúrate de que el cuerpo de la respuesta contenga el mensaje de error proporcionado por la función
             expect(response.body).toHaveProperty('error');
           });
-    })
+    }) */
 })

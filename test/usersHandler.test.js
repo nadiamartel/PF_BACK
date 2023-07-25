@@ -15,88 +15,13 @@ describe('Users Handler', () => {
             }
         }
     })
-
-    describe('Post User', () => {
-         it('Deberia crear correctamente un usuario', async () => {
-            const newUser = {
-                    id: "10023",
-                    name: "mati antunez",
-                    email: "mati@antunez.com",
-                    password: "pass123",
-                    phone: "123456789"
-            }
-
-            const response = await request(server)
-            .post('/users')
-            .send(newUser)
-
-            expect(response.status).toBe(200)
-            createdUserId = response.body.id;
-         },10000)
-         it('Deberia devolver un error cuando ya hay un usuario con el email ingresado', async () => {
-            const newUser = {
-                id: "121414",
-                name: "sportiverse",
-                email: "sportiverse@gmail.com",
-                password: "pass123",
-                phone: "123456789"
-            }
-
-            const response = await request(server)
-            .post('/users')
-            .send(newUser)
-
-            expect(response.status).toBe(400)
-            expect(response.body.error).toBe("El usuario ya existe")
-         })
-    })
-
-    describe('Get User by Id', () => {
-        it('Trae a un usuario por Id', async () => {
-            const response = await request(server)
-            .get('/users/1')
-
-            expect(response.status).toBe(200)
-        })
-        it('Devuelve un error si no existe el usuario', async () => {
-            const response = await request(server)
-            .get('/users/153253')
-
-            expect(response.status).toBe(404)
-            expect(response.text).toBe("No se puedo encontrar el usuario")
-        })
-    })
-    describe('Delete User', () => {
-        it('Deberia eliminar exitosamente el usuario', async () => {
-            const response = await request(server)
-            .delete('/users/13')
-
-            expect(response.status).toBe(200)
-            expect(response.body.message).toBe("Usario eliminado exitosamente")
-        })
-        it('Deberia devolver un error si no encuentra al usuario', async () => {
-            const response = await request(server)
-            .delete('/users/13832')
-
-            expect(response.status).toBe(400)
-            expect(response.body.error).toBe("No se encontro el usuario")
-        })
-    })
-    describe('Get All Users', () => {
-        it('Trae todos los usuarios clientes', async () => {
-            const response = await request(server)
-            .get('/users')
-
-            expect(response.status).toBe(200)
-        })
-    })
     describe('Put Users', () => {
         it('Deberia modificar exitosamente el usuario', async () => {
             const putUser = {
-                phone: "0532532575235"
+                phone: "05325325755"
             }
             const response = await request(server)
-            .put('/users/12')
+            .put('/users/35')
             .send(putUser)
 
             expect(response.status).toBe(200)
@@ -134,10 +59,85 @@ describe('Users Handler', () => {
             expect(response.body.error).toBe("No se puede editar el usuario porque no es un cliente");
         })
     })
+    describe('Post User', () => {
+         it('Deberia crear correctamente un usuario', async () => {
+            const newUser = {
+                    id: '99',
+                    name: "mati antunez",
+                    email: 'mati@gmail.com',
+                    password: "pass123",
+                    phone: "123456",
+                    client: true
+            }
+
+            const response = await request(server)
+            .post('/users')
+            .send(newUser)
+            expect(response.status).toBe(200)
+            createdUserId = response.body.id;
+         },15000)
+         it('Deberia devolver un error cuando ya hay un usuario con el email ingresado', async () => {
+            const newUser = {
+                id: 6,
+                name: "agustina",
+                email: "nadiagmartel@gmail.com",
+                password: "1234567",
+                phone: "0532532575235",
+                client: true,
+            }
+
+            const response = await request(server)
+            .post('/users')
+            .send(newUser)
+
+            expect(response.status).toBe(400)
+            expect(response.body.error).toBe("El usuario ya existe")
+         })
+    })
+    describe('Get User by Id', () => {
+        it('Trae a un usuario por Id', async () => {
+            const response = await request(server)
+            .get('/users/1')
+
+            expect(response.status).toBe(200)
+        })
+        it('Devuelve un error si no existe el usuario', async () => {
+            const response = await request(server)
+            .get('/users/153253')
+
+            expect(response.status).toBe(404)
+            expect(response.text).toBe("No se puedo encontrar el usuario")
+        })
+    })
+    describe('Delete User', () => {
+        it('Deberia eliminar exitosamente el usuario', async () => {
+            const response = await request(server)
+            .delete('/users/35')
+
+            expect(response.status).toBe(200)
+            expect(response.body.message).toBe("Usario eliminado exitosamente")
+        })
+        it('Deberia devolver un error si no encuentra al usuario', async () => {
+            const response = await request(server)
+            .delete('/users/13832')
+
+            expect(response.status).toBe(400)
+            expect(response.body.error).toBe("No se encontro el usuario")
+        })
+    })
+    describe('Get All Users', () => {
+        it('Trae todos los usuarios clientes', async () => {
+            const response = await request(server)
+            .get('/users')
+
+            expect(response.status).toBe(200)
+        })
+    })
+    
     describe('Restore User', () => {
         it('Deberia restaurar exitosamente el usuario', async () => {
             const response = await request(server)
-            .put('/users/13/restore')
+            .put('/users/35/restore')
 
             expect(response.status).toBe(200)
         })
