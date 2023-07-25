@@ -105,6 +105,16 @@ const getUserName = async (name) => {
   return userName;
 };
 
+const banUsers = async () => {
+  const usersBan = await User.findAll({paranoid: false})
+
+  const filterUsersBan = await usersBan.filter(user => user.deletedAt !== null)
+
+  if(!filterUsersBan.length) throw Error('No hay usuarios baneados')
+
+  return filterUsersBan
+}
+
 module.exports = {
   postUser,
   putUser,
@@ -113,4 +123,5 @@ module.exports = {
   infoAllUsers,
   restoreUserById,
   getUserName,
+  banUsers
 };
