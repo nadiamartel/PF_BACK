@@ -935,15 +935,15 @@ const sendMailRefundAdmin = async (refund) => {
     <td class="pad" style="padding-top:5px;">
     <div style="font-family: sans-serif">
     <div class="" style="font-size: 12px; font-family: Arial, Helvetica Neue, Helvetica, sans-serif; mso-line-height-alt: 21.6px; color: #ffffff; line-height: 1.8;">
-    <p style="margin: 0; text-align: left; mso-line-height-alt: 30.6px;"><span style="font-size:17px;"><strong><span style=""><span style="">Tu reserva ha sido cancelada por un administrador, para más informacion contáctanos respondiendo este email. Los datos de tu reserva cancelada son:</span></span></strong></span><u></u></p>
+    <p style="margin: 0; text-align: left; mso-line-height-alt: 30.6px;"><span style="font-size:17px;"><strong><span style="color:#ffffff"><span style="color:#ffffff">Tu reserva ha sido cancelada por un administrador, para más informacion contáctanos respondiendo este email. Los datos de tu reserva cancelada son:</span></span></strong></span><u></u></p>
     <p style="margin: 0; text-align: left; mso-line-height-alt: 21.6px;"> </p>
-    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Actividad:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">${refund?.activity}</span></span></p>
-    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><span style="font-size:18px;"><strong><span style=""><u>Fecha:</u> </span></strong><span style="">${refund?.date}</span></span></p>
-    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Horario:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">${refund?.hour} hs.</span></span></p>
-    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="">Sucursal:</span></strong></span></u><span style="font-size:18px;"><strong><span style=""> </span></strong><span style="">${refund?.store}</span></span></p>
-    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><span style="font-size:18px;"><span style=""><u><strong>Costo:</strong></u><strong> </strong>${refund?.cost}</span></span></p>
+    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="color:#ffffff">Actividad:</span></strong></span></u><span style="font-size:18px;"><strong><span style="color:#ffffff"> </span></strong><span style="color:#ffffff">${refund?.activity}</span></span></p>
+    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><span style="font-size:18px;"><strong><span style="color:#ffffff"><u>Fecha:</u> </span></strong><span style="color:#ffffff">${refund?.date}</span></span></p>
+    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="color:#ffffff">Horario:</span></strong></span></u><span style="font-size:18px;"><strong><span style="color:#ffffff"> </span></strong><span style="color:#ffffff">${refund?.hour} hs.</span></span></p>
+    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><u><span style="font-size:18px;"><strong><span style="color:#ffffff">Sucursal:</span></strong></span></u><span style="font-size:18px;"><strong><span style="color:#ffffff"> </span></strong><span style="color:#ffffff">${refund?.store}</span></span></p>
+    <p style="margin: 0; text-align: center; mso-line-height-alt: 32.4px;"><span style="font-size:18px;"><span style="color:#ffffff"><u><strong>Costo:</strong></u><strong> </strong>${refund?.cost}</span></span></p>
     <p style="margin: 0; text-align: center; mso-line-height-alt: 21.6px;"> </p>
-    <p style="margin: 0; text-align: center; mso-line-height-alt: 30.6px;"><span style="font-size:17px;"><span style=""><strong>Hemos realizado la devolución de tu pago, el mismo impactara en tu cuenta bancaria a lo largo de las próximas 48 hs, dependiendo de tu banco.</strong></span></span></p>
+    <p style="margin: 0; text-align: center; mso-line-height-alt: 30.6px;"><span style="font-size:17px;"><span style="color:#ffffff"><strong>Hemos realizado la devolución de tu pago, el mismo impactara en tu cuenta bancaria a lo largo de las próximas 48 hs, dependiendo de tu banco.</strong></span></span></p>
     <p style="margin: 0; text-align: center; mso-line-height-alt: 21.6px;"> </p>
     </div>
     </div>
@@ -1074,7 +1074,7 @@ const sendMailRefundAdmin = async (refund) => {
     <!--[if !vml]><!-->
     <table cellpadding="0" cellspacing="0" class="icons-inner" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; display: inline-block; margin-right: -4px; padding-left: 0px; padding-right: 0px;"><!--<![endif]-->
     <tr>
-    <td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 6px;"><a href="https://www.designedwithbee.com/" style="text-decoration: none;" target="_blank"><img align="center" alt="Designed with BEE" class="icon" height="32" src="images/bee.png" style="height: auto; display: block; margin: 0 auto; border: 0;" width="34"/></a></td>
+    <td style="vertical-align: middle; text-align: center; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; padding-right: 6px;"><a href="https://www.designedwithbee.com/" style="text-decoration: none;" target="_blank"><img align="center" alt="Designed with BEE" class="icon" height="32" src="https://res.cloudinary.com/dwdosvfpx/image/upload/v1689391666/bee_kyxfbd.png" style="height: auto; display: block; margin: 0 auto; border: 0;" width="34"/></a></td>
     <td style="font-family: Arial, Helvetica Neue, Helvetica, sans-serif; font-size: 15px; color: #9d9d9d; vertical-align: middle; letter-spacing: undefined; text-align: center;"><a href="https://www.designedwithbee.com/" style="color: #9d9d9d; text-decoration: none;" target="_blank">Designed with BEE</a></td>
     </tr>
     </table>
