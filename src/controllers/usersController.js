@@ -1,7 +1,7 @@
 const { User, Reservation, Review } = require("../db");
 const { Op } = require('sequelize');
 
-const postUser = async ({ id, name, email, password, phone }) => {
+const postUser = async ({ id, name, email, password, phone, client }) => {
   const [user, created] = await User.findOrCreate({
     where: { email },
     defaults: {
@@ -10,6 +10,7 @@ const postUser = async ({ id, name, email, password, phone }) => {
       email,
       password,
       phone,
+      client
     },
   });
 
