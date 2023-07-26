@@ -1,7 +1,18 @@
 const { Reservation, User, Activity, Store } = require("../db");
-const emailer = require ('../emailer') 
+const emailer = require("../emailer");
+const { Op } = require("sequelize");
 
 const createReservation = async ({ idUser, idActivity, date, cost, hour }) => {
+  const userFound = await User.findByPk(idUser)
+
+  if (!userFound) throw Error('El usuario no existe')
+
+  const activityFound = await Activity.findByPk(idActivity)
+
+  if (!activityFound) throw Error('La actividad no existe')
+
+  if(!idUser || !idActivity || !date || !cost || !hour) throw Error('Faltan datos')
+
   const newReservation = await Reservation.create({
     date,
     hour,
@@ -43,6 +54,10 @@ const getAllReservations = async () => {
 };
 
 const deleteOneReservation = async ({ id }) => {
+  const reservation = await Reservation.findByPk(id);
+
+  if (reservation.length < 1) throw Error("No se encontró la reserva");
+
   const deleteReservation = await Reservation.destroy({
     where: {
       id,
@@ -63,16 +78,55 @@ const putReservation = async ({ id }) => {
 
   return reservPut;
 };
-const postEmail = async ({ reservId, activity, date, hour,cost, user,store,storeAddress}) => {
-  console.log (user)
-  const foundUser = await User.findOne({where:{name:user}})
-  const emailUser = foundUser.email
-  const response = {reservId, activity, date, hour,cost, user,store,storeAddress,emailUser}
+const postEmail = async ({
+  reservId,
+  activity,
+  date,
+  hour,
+  cost,
+  user,
+  store,
+  storeAddress,
+}) => {
+  const foundUser = await User.findOne({ where: { name: user } });
+  const emailUser = foundUser.email;
+  const response = {
+    reservId,
+    activity,
+    date,
+    hour,
+    cost,
+    user,
+    store,
+    storeAddress,
+    emailUser,
+  };
 
-  emailer.sendMailReservation(response)
+  emailer.sendMailReservation(response);
+};
 
+const getEmail = async (email) => {
+  const foundUser = await User.findOne({
+   where: { email }
+   })
+   if (!foundUser) throw Error('No existe un usuario con ese email')
+
+   const response = await Reservation.findAll({
+   where: {},
+   include: [
+     {
+       model: User,
+       where: {
+         email: email
+       }
+     }
+   ]
+ });
+
+ if(!response.length) throw Error("El usuario no tiene reservas hechas");
+
+ return response
 }
-
 
 module.exports = {
   createReservation,
@@ -80,4 +134,5 @@ module.exports = {
   deleteOneReservation,
   putReservation,
   postEmail,
+  getEmail
 };

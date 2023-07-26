@@ -5,7 +5,7 @@ const postStore = async ({ id, name, address, phone, picture, email, maps }) => 
     where: { name },
     defaults: {
       id,
-      name,
+      name: name.toLowerCase(),
       address,
       picture,
       phone,
@@ -29,7 +29,32 @@ const getAllStores = async () => {
   return allStores
 }
 
+const deleteStore = async (id) => {
+  const found = await Store.findByPk(id);
+
+  if(!found) throw Error('No se encontro la sucursal');
+
+  const deleted = await Store.destroy({
+    where: {
+      id: id
+    },
+  });
+
+  return deleted;
+}
+
+const restoreStore = async (name) => {
+
+  const store = await Store.restore({where: {name: name.toLowerCase()}});
+
+  if(!store) throw Error('No se encontro la sucursal');
+
+  return store;
+}
+
 module.exports = {
   postStore,
   getAllStores,
+  deleteStore,
+  restoreStore
 };

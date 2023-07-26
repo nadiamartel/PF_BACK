@@ -1,0 +1,23 @@
+name: Unit Tests
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches: [develop]
+
+jobs:
+  Jest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Run Tests
+        env:
+          DB_DEPLOY: ${{ secrets.DB_DEPLOY }}
+          KEY_EMAILER: ${{ secrets.KEY_EMAILER }}
+          TOKEN_MP: ${{ secrets.TOKEN_MP }}
+        run: |
+          npm install 
+          npm test
