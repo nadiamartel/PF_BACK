@@ -14,8 +14,8 @@ const getAllAdmin = async(req, res) =>{
   const updateAdmin = async(req, res) =>{
     try {
       const { id } = req.params;
-      const { password, client} = req.body;
-      const adminUpdate = await newPassword({id, password, client});
+      const password = Object.keys(req.body)[0];
+      const adminUpdate = await newPassword({id, password});
       return res.status(200).json(adminUpdate);
     } catch (error) {
       return res.status(404).send("El cambio no se pudo realizar")
