@@ -37,8 +37,8 @@ const postEmailRef = async ({
     store,
     email
   }) => {
-    console.log(email);
     const foundUser = await User.findOne({ where: { name: user } });
+    if(!foundUser) throw Error('No se encontro al usuario')
     const emailUser = foundUser.email;
     const response = {
       reservId,
@@ -50,7 +50,6 @@ const postEmailRef = async ({
       store,
       emailUser,
     };
-    console.log(emailUser)
   
     emailer.sendMailRefundAdmin(response);
   };
