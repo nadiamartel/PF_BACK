@@ -13,7 +13,7 @@ describe('Reservations Handler', () => {
         },15000)
         it('No se encontraron reservas', async () => {
             const response = await request(server)
-            .get('/reservations/sportiverse@gmail.com/email')
+            .get('/reservations/gonza@henry.com/email')
             
             expect(response.status).toBe(400)
             expect(response.body.error).toBe("El usuario no tiene reservas hechas")
@@ -144,14 +144,7 @@ describe('Reservations Handler', () => {
 
             expect(response.status).toBe(200)
         })
-/*         it('No hay reservar realizadas', async () => {
 
-            const response = await request(server)
-            .get('/reservations')
-            
-            expect(response.status).toBe(400)
-            expect(response.body.error).toBe("No hay reservas hechas!")
-        }) */
     })
     describe('Delete reservations', () => {
 
@@ -183,8 +176,8 @@ describe('Reservations Handler', () => {
             expect(response.body.error).toBe("No se encontró la reserva") 
         })
     })
-    /* describe('Post email reservations',()=>{
-        it('deberia enviar un email', async () => {
+    describe('Post email reservations',()=>{
+        /* it('deberia enviar un email', async () => {
             const req = {
               body: {
                 reservId: '282',
@@ -204,7 +197,7 @@ describe('Reservations Handler', () => {
             await postEmailReservation(req, res);
             expect(res.status).toHaveBeenCalledWith(200);
             expect(res.json).toHaveBeenCalledWith({ message: 'email enviado' });
-          })
+          }) */
           it('deberia responder con un status 400 y el mensaje de error correspondiente', async () => {
             // Datos de ejemplo que provocarían el error
             const data = {
@@ -219,5 +212,5 @@ describe('Reservations Handler', () => {
             // Asegúrate de que el cuerpo de la respuesta contenga el mensaje de error proporcionado por la función
             expect(response.body).toHaveProperty('error');
           });
-    }) */
+    })
 })

@@ -62,12 +62,10 @@ describe('Users Handler', () => {
     describe('Post User', () => {
          it('Deberia crear correctamente un usuario', async () => {
             const newUser = {
-                    id: '99',
                     name: "mati antunez",
                     email: 'mati@gmail.com',
                     password: "pass123",
                     phone: "123456",
-                    client: true
             }
 
             const response = await request(server)
@@ -162,6 +160,15 @@ describe('Users Handler', () => {
 
             expect(response.status).toBe(500)
         })
+    })
+    describe('Get Users ban', () => {
+        it('deberia traer todos los usuarios baneados', async () => {
+            const response = await request(server)
+            .get('/users/ban/users')
+            
+            expect(response.status).toBe(200)
+        })
+
     })
 
 
