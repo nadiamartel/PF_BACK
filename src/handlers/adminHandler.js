@@ -15,7 +15,6 @@ const getAllAdmin = async(req, res) =>{
     try {
       const { id } = req.params;
       const password = Object.keys(req.body)[0];
-      console.log(password);
       const adminUpdate = await newPassword({id, password});
       return res.status(200).json(adminUpdate);
     } catch (error) {
