@@ -750,7 +750,6 @@ const sendMailRefund = async (refund) => {
 
 const sendMailRefundAdmin = async (refund) => {
   const transporter = createTrans()
-  console.log(refund?.email);
   const info = await transporter.sendMail({
     from: '"Sportiverse ⚡"<sportiversecompay@outlook.com >',
     to: `${refund?.emailUser}`,
