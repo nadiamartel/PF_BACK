@@ -11,7 +11,7 @@ const sequelize = new Sequelize(DB_DEPLOY, {
   logging: false, 
   native: false,
   dialectOptions: {
-    acquireTimeout: 65000,
+    acquireTimeout: 9000,
     ssl: {
       require: true,
       rejectUnauthorized: false // Solo si tienes problemas con certificados autofirmados
